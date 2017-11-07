@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8">
+ <title>フォーム課題</title>
+</head>
+<body>
+<header>
+ <h1>ご予約</h1>
+</header>
+<main>
+ <form action="#" method="post">
+  <dl>
+   <dt><label for="schedule">日程</label></dt>
+   <dd><input type="date" name="schedule" id="schedule"></dd>
+   <dd><select name="days" id="days">
+    <option value="1d">1泊</option>
+    <option value="2d">2泊</option>
+    <option value="3d">3泊</option>
+    <option value="4d">4泊</option>
+    <option value="5d">5泊</option>
+   </select></dd>
+   <dt><label for="people">人数</label></dt>
+   <dd><select name="people" id="people">
+    <option value="1p">1人</option>
+    <option value="2p">2人</option>
+    <option value="3p">3人</option>
+    <option value="4p">4人</option>
+   </select></dd>
+   <dd><select name="room" id="room">
+     <option value="1r">1部屋</option>
+     <option value="2r">2部屋</option>
+    </select></dd>
+   <dt>食事</dt>
+   <dd>
+    <input type="radio" name="meal" id="meal0">
+    <label for="meal0">素泊まり</label>
+    <input type="radio" name="meal" id="meal1">
+    <label for="meal1">朝食のみ</label>
+    <input type="radio" name="meal" id="meal2">
+    <label for="meal2">朝夕</label>
+   </dd>
+  </dl>
+  <div class="total"><hr></div>
+  <dl>
+   <dt><label for=""></label></dt>
+   <dd><input type="date" name="" id=""></dd>
+    </dl>
+    <input type="submit" value="確認">
+  </form>
+</main>
+</body>
+</html>
