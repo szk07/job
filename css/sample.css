@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html,
+body {
+  font-family: Helvetica Neue, YuGothic, sans-serif;
+}
+
+#debug {
+  display: none;
+}
+
+.debug-button {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: 5px solid #333;
+  color: #333;
+  letter-spacing: .03em;
+}
+
+.debug-button:after {
+  content: "off";
+  display: inline;
+}
+
+#debug:checked + .debug-button {
+  border-color: #c00;
+  color: #c00;
+}
+
+#debug:checked + .debug-button:after {
+  content: "on";
+}
+
+.container {
+  box-sizing: border-box;
+  padding-top: 25vh;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 200px;
+  perspective-origin: center 40%;
+}
+
+.layer-group {
+  position: relative;
+  margin: 0 auto;
+  height: 100vh;
+  min-height: 640px;
+  width: 1200px;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform-style: preserve-3d;
+}
+
+.layer-group.is-debug {
+  transform: translate3d(300px, 0, -500px) rotateY(30deg);
+}
+
+.layer-group.is-debug .layer {
+  background-color: rgba(100, 100, 255, 0.3);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.layer-group.is-debug .layer[data-depth="0"] {
+  background-color: rgba(100, 255, 100, 0.5);
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1200px;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.layer[data-depth="-1"] {
+  transform: translateZ(50px) scale(0.75);
+}
+
+.layer[data-depth="0"] {
+  transform: translateZ(0px) scale(1);
+}
+
+.layer[data-depth="1"] {
+  transform: translateZ(-50px) scale(1.25);
+}
+
+.layer[data-depth="2"] {
+  transform: translateZ(-100px) scale(1.5);
+}
+
+.layer[data-depth="3"] {
+  transform: translateZ(-150px) scale(1.75);
+}
+
+.layer[data-depth="4"] {
+  transform: translateZ(-200px) scale(2);
+}
+
+[data-no] {
+  position: absolute;
+  display: block;
+}
+
+[data-no="1"] {
+  left: 40px;
+  top: -100px;
+}
+
+[data-no="2"] {
+  left: 1000px;
+  top: 520px;
+}
+
+[data-no="3"] {
+  left: 700px;
+  top: 600px;
+}
+
+[data-no="4"] {
+  left: 320px;
+  top: 400px;
+}
+
+[data-no="5"] {
+  left: 700px;
+  top: 100px;
+}
+
+[data-no="6"] {
+  left: 600px;
+  top: 400px;
+}
+
+[data-no="7"] {
+  left: 300px;
+  top: 200px;
+}
+
+[data-no="8"] {
+  left: 350px;
+  top: 700px;
+}
+
+[data-no="9"] {
+  left: 100px;
+  top: 500px;
+}
+
+[data-no="10"] {
+  left: 810px;
+  top: 350px;
+}

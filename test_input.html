@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .gender label, .place label{
+      margin-right: 20px;
+      padding: 1px 5px 1px 0;
+    }
+    p{
+      font-size: 80%;
+      color: blue;
+      margin: 5px 0 30px;
+    }
+    </style>
+  </head>
+  <body>
+    <form action="xxx/xxx.php" method="post">
+    <fieldset>
+      <legend>会員登録</legend>
+      <dl>
+        <dt><label for="myname">氏名</label></dt>
+        <dd>
+          <input type="text" name="myname" id="myname" size="10" maxlength="20" placeholder="20文字以内" required>
+          <p>type:text　1行テキスト<br>
+          size=テキストエリアの広さ（文字数）、maxlength<small>（マックスレングス）</small>=最大文字数、placeholder<small>（プレスフォルダー）</small>＝ガイドテキスト<br>
+          value=初期値、required＝必須項目にする<br>
+        <strong><u>labelタグのforとinputタグのidは一致させる</u></strong>ことでforとidが結びついた要素がフォーカスされる</p>
+        </dd>
+        <dt>性別</dt>
+        <dd class="gender">
+          <input type="radio" name="gender" id="man" value="男">
+          <label for="man">男</label>
+          <input type="radio" name="gender" id="woman" value="女">
+          <label for="woman">女</label>
+          <input type="radio" name="gender" id="xman" value="不明" checked>
+          <label for="xman">不明</label>
+          <p>type:radio　ラジオボタン<br>
+            name＝グループ、id＝識別id（同一不可）、value＝サーバに送られる情報、checked＝最初からチェックする</p>
+        </dd>
+        <dt><label for="password">希望パスワード</label></dt>
+        <dd>
+          <input type="password" name="password" id="password" size="10" maxlength="20" placeholder="20文字以内">
+          <p>type:password　伏字入力<br>
+          入力判定（英数字混入等）や伏字を見えるようにする処理はJavaScriptやPHPでの処理になる。</p>
+        </dd>
+        <dt>希望勤務地（複数選択可）</dt>
+        <dd class="place">
+          <input type="checkbox" name="place" id="touhoku" value="東北">
+          <label for="touhoku">東北</label>
+          <input type="checkbox" name="place" id="kanto" value="関東" checked>
+          <label for="kanto">関東</label>
+          <input type="checkbox" name="place" id="kansai" value="関西">
+          <label for="kansai">関西</label>
+          <p>type:checkbox　チェックボックス<br>
+            checked＝最初からチェックする</p>
+        </dd>
+        <dt>年齢（プルダウンメニュー型）</dt>
+        <dd>
+          <select name="age" id="age">
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40" selected>40</option>
+            <option value="50">50</option>
+          </select>歳代
+          <p><strong>selectタグ</strong>　optionタグはselect専用の選択タグ<br>
+           selected＝初期値</p>
+        </dd>
+        <dt>年齢（リストボックス型）</dt>
+        <dd>
+          <select name="age" id="age" size="3">
+            <option value="20">20</option>
+            <option value="30" selected>30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+          </select>歳代
+          <p><strong>selectタグ</strong><br>
+            size（行数）を指定するとリストボックス型になる、selected＝初期値</p>
+        </dd>
+        <dt><label for="comment">ご意見・ご感想</label></dt>
+        <dd>
+          <textarea name="comment" id="comment" rows="4" cols="30" placeholder="感想をご記入ください。"></textarea>
+          <p><strong>textareaタグ</strong>　開始と終了タグの間に文字やインデントを入れると反映される。（テキストボックスのvalue属性に近い）<br>
+            rows＝行数、cols＝1行あたりの文字数</p>
+        </dd>
+        <dt><label for="url">URL</label></dt>
+        <dd><input type="url" name="url" id="url" size="50" maxlength="100" placeholder="半角英数字"></dd>
+        <dt><label for="email">電子メールアドレス</label></dt>
+        <dd><input type="email" name="email" id="email" size="50" maxlength="100" placeholder="半角英数字"></dd>
+        <dt><label for="number">購入数</label></dt>
+        <dd><input type="number" name="number" id="number" max="20" min="0">
+        <p>max=上限値、min=下限値</p></dd>
+        <dt><label for="birth">生年月日</label></dt>
+        <dd><input type="date" name="birth" id="birth"></dd>
+        <dt><label for="tel">電話番号</label></dt>
+        <dd><input type="text" name="tel" id="tel"></dd>
+      </dl>
+      <p>HTML5で追加された独自チェック機能</p>
+      <input type="submit" value="送信">
+      <input type="reset" value="取消">
+      <p style="margin-top:30px;">
+        <strong>form</strong>　action＝データの転送先（PHPもしくはJavaなど）のURLを入れる。#を入れると機能停止になる<br>
+        method＝HTMLメソッド　get送信とpost送信の2種類ある。getはURLに反映、postは非反映。デフォルトはpost。<br>
+        <strong>submit</strong>　送信してリセットする<br>
+        <strong>reset</strong>　送信しないでリセット</p>
+    </fieldset>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+$perspective: 200;
+$easeOutQuart: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+
+html,
+body {
+    font-family: Helvetica Neue, YuGothic, sans-serif;
+}
+
+
+
+#debug {
+    display: none;
+}
+.debug-button {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: 5px solid #333;
+    color: #333;
+    letter-spacing: .03em;
+    &:after{
+       content: "off";
+       display: inline;
+    }
+}
+#debug:checked + .debug-button {
+    border-color: #c00;
+    color: #c00;
+    &:after { content: "on"; }
+}
+
+
+
+.container {
+    box-sizing: border-box;
+    padding-top: 25vh;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: #{$perspective}px;
+    perspective-origin: center 40%;
+}
+
+.layer-group {
+    position: relative;
+    margin: 0 auto;
+    height: 100vh;
+    min-height: 640px;
+    width: 1200px;
+    transition: transform .4s $easeOutQuart;
+    transform-style: preserve-3d;
+    &.is-debug {
+        transform: translate3d(300px, 0 , -500px) rotateY(30deg);
+        .layer {
+            background-color: rgba(100, 100, 255, .3);
+            box-shadow: 0 0 2px 2px rgba(0, 0, 0, .5);
+            &[data-depth="0"] { background-color: rgba(100, 255, 100, .5); }
+        }
+    }
+}
+.layer-group + .layer-group {}
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 1200px;
+    min-height: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@for $i from -1 through 4 {
+    $z: -1 * $perspective * $i / 4;
+    $scale: 1 + $z / $perspective * -1;
+    .layer[data-depth="#{$i}"] {
+        transform: translateZ(#{$z}px) scale(#{$scale});
+    }
+}
+
+
+
+$cat_pos: (
+    1: (40 -100),
+    2: (1000 520),
+    3: (700 600),
+    4: (320 400),
+    5: (700 100),
+    6: (600 400),
+    7: (300 200),
+    8: (350 700),
+    9: (100, 500),
+    10: (810 350),
+);
+[data-no] {
+    position: absolute;
+    display: block;
+}
+@each $i, $pos in $cat_pos {
+    [data-no="#{$i}"] {
+        left: #{nth($pos, 1)}px;
+        top: #{nth($pos, 2)}px;
+    }
+}
