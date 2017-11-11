@@ -28,12 +28,18 @@ body{
 
 /* Header */
 header{
-  background: url(../imgs/mv.jpg) fixed no-repeat left 280%;
+  background: url(../imgs/mv.jpg) fixed no-repeat left 200%;
   background-size: cover;
   width: 100%;
   min-width: 100%;
   height: 300px;
   overflow: hidden;
+  h1{
+    font-family: "Sawarabi Mincho";
+    font-size: 5rem;
+    font-weight: 200;
+    width: 3.5em;
+  }
 }
 
 /* Cntents */
@@ -41,7 +47,7 @@ header{
   background: url(../imgs/bg.png) repeat;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 80px 20px 20px 20px;
 }
 main{
   background-color: rgba(255, 255, 255, 0.5);

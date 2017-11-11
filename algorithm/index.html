@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>webプログラミング</title>
+  <style>
+    .wrapper{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1{
+      padding: 0 20px;
+    }
+    table {
+      border-spacing: 0;
+      margin-bottom: 20px;
+    }
+    thead{
+      background: #ddd;
+    }
+    th:first-child{
+      border-right: 1px solid #fff;
+    }
+    td{
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+    }
+    td:last-child{
+      border-left: none;
+    }
+    article{
+      width: 700px;
+      border: 3px solid #999;
+      margin: 10px;
+      padding: 10px 30px;
+    }
+    dt{
+      position: relative;
+      padding-left: 20px;
+    }
+    dt:hover{
+      color: blue;
+      cursor: pointer;
+    }
+    dt::before{
+      position: absolute;
+      content: '';
+      display: block;
+      top: .4em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border: 1px solid #4682b4;
+      border-radius: 30%;
+    }
+    dd{
+      display: none;
+    }
+    dd + dt {
+      margin-top: 10px;
+    }
+    h3{
+      margin: 50px auto 10px;
+    }
+    dd > h3:first-child{
+      margin-top: 10px;
+    }
+    .mt30{
+      margin-top: 30px;
+    }
+    .hosoku{
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .sample{
+      border: 4px double #4682b4;
+      margin: 20px 0;
+      padding: 15px 20px;
+    }
+    .sample > p.title{
+      color: #4682b4;
+      font-weight: bold;
+      margin: 0;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script>
+    $(function() {
+      $('dt').click(function() {
+        if($("+dd", this).css("display")=="none"){
+          $("+dd", this).slideDown(500);
+        }else{
+          $("+dd",this).slideUp(500);
+        }
+      });
+    });
+    var meibo = [
+      [1, "山田", 24, "男性", "東京"],
+      [2, "鈴木", 30, "男性", "神奈川"],
+      [3, "田中", 45, "女性", "埼玉"]
+    ];
+    var i=2;
+    // alert(
+    //   "会員番号"+meibo[i][0]+
+    //   "番の"+meibo[i][1]+
+    //   "さん("+meibo[i][2]+
+    //   ")は、"+meibo[i][4]+
+    //   "県にお住まいです"
+    // );
+    var ddd="あいうえお"
+    // alert(ddd[1]);
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+  <header>
+    <h1>webプログラミング</h1>
+  </header>
+  <main>
+    <article>
+      <h2>序章 制御の概念</h2>
+      <p>制御の概念の有無</p>
+      <table>
+        <thead>
+          <tr>
+            <th>有</th>
+            <th>無</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>JavaScript<br>
+            Java、PHP、C言語<br>
+            VBA、VB</td>
+            <td>HTML、CSS、xml</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+    <article>
+      <h2>第1章 アルゴリズム</h2>
+      <dl>
+        <dt>アルゴリズムとは</dt>
+        <dd>与えられた課題を解決するための処理手順<br>
+          <ul>
+            <li>料理のレシピ</li>
+            <li>ゲームの攻略法</li>
+          </ul>
+        </dd>
+        <dt>アルゴリズムに必要な条件</dt>
+        <dd>正当性：必ず正しい答えを導き出す事を保証すること。<br>
+        停止性：最終的に必ず停止すること。</dd>
+        <dt>構造化プログラミングの3つの構造</dt>
+        <dd>
+          <ul>
+            <li>逐次構造：処理を記述した順番に逐次実行する。</li>
+            <li>選択構造：条件により実行する処理の流れを変える。</li>
+            <li>反復構造：条件が成立する間、一定の処理を繰り返す。</li>
+          </ul>
+          <p>プログラミングは上記の3つの構造の組み合わせでできてる。<br>
+          どのプログラミングでも上記の構造に分類することができる。</p>
+        </dd>
+      </dl>
+    </article>
+    <article>
+      <h2>第2章 変数と配列</h2>
+      <dl>
+        <dt>データ型</dt>
+        <dd>
+          <ul>
+            <li>整数型：整数値（小数点を含まない）</li>
+            <li>実数型：実数地（小数点を含む）</li>
+            <li>文字型：1文字を扱う</li>
+            <li>文字列型：複数の文字を扱う</li>
+            <li>理論型：「真（true）」「偽（false）」を扱う</li>
+          </ul>
+          <p>文字列型には専用メソッドがあり検索機能等がついている。<br>
+            文字型はその機能はない分軽い。</p>
+        </dd>
+        <dt>「値」の表現</dt>
+        <dd>
+          <ul>
+            <li>ダブルクォーテーション（”）で括る：<strong>”文字列型”</strong></li>
+            <li>シングルクォーテーション（’）で括る：<strong>'文字型'</strong></li>
+            <li>クォーテーション記号なし：整列型、実数型、理論型</li>
+          </ul>
+          <p>JavaScript、PHPはクォーテーションの区別はなし（どちらも使用OK）</p>
+        </dd>
+        <dt>変数</dt>
+        <dd>
+          <h3>変数の概要</h3>
+          <ul>
+            <li>データ（値）を入れる入れ物</li>
+            <li>1つの変数には、データ（値）は1つしか入らない</li>
+            <li>変数にデータ（値）を入れることを代入という</li>
+            <li>変数名は一意であること</li>
+          </ul>
+          <h3>禁則ルール</h3>
+          <ul>
+            <li>変数名は「数字のみ」「数字で始まる名前」は使用不可</li>
+            <li>変数名にプログラム言語の命令文と同じ名前は使用不可（予約語）</li>
+          </ul>
+          <p>HTMLのid、class、name属性値も同じ禁則ルール</p>
+          <h3>記述方法</h3>
+          <ul>
+            <li>変数にデータ（値）を代入する記述はイコールを使う</li>
+            <li><strong>イコール自体は「等しい」ではなく、「代入」という意味</strong></li>
+            <li>イコールの左辺に変数名、右辺に値を記述する</li>
+            <li>イコール2個で、左辺と右辺が「等しい」という意味</li>
+            <li>変数に変数を代入した場合、コピー元の変数の中身が、コピー先へ代入される</li>
+          </ul>
+          <p><strong>
+            <ruby>A<rt>【左】変数</rt></ruby>
+            &nbsp;=&nbsp;
+            <ruby>10<rt>【右】値</rt></ruby>
+          </strong></p>
+          <div class="sample">
+            <p class="title">SAMPLE</p>
+            <p>STR = "ABC"</p>
+            <p>→変数STRに文字列"ABC"を代入する</p>
+          </div>
+          <h3>変数の代入</h3>
+          <ul>
+            <li>変数の代入は2つの方式がある
+              <ul>
+                <li>【値渡し】<br>
+                  変数内に値が格納される。すべての言語で使える</li>
+                <li>【参照渡し】<br>
+                  変数内にメモリ番地が格納される。オブジェクト指向言語で使える</li>
+              </ul></li>
+              <li>変数には、代入する値に対応するデータ型がある</li>
+              <li>変数のデータ型は、Web系言語ははブラウザが決める。<br>
+              Web系以外の言語は人間が変数宣言で指定する。</li>
+          </ul>
+        </dd>
+        <dt>配列</dt>
+        <dd>
+          <h3>配列の概要</h3>
+          <ul>
+            <li>複数の変数を一列に並べたもの</li>
+            <li>配列にもデータ型がある</li>
+            <li>オブジェクト指向型言語では、配列には同じデータ型の値しか入らない</li>
+            <li>Web系言語（JS、PHP）では、配列には異なるデータ型が入る</li>
+          </ul>
+          <h3>禁則ルール</h3>
+          <ul>
+            <li>配列名のルールは「一意であること」「先頭に数字でないこと」。変数と同じ。</li>
+          </ul>
+          <h3>記述方法</h3>
+          <ul>
+            <li>配列にデータを追加したり、読み込んだりする場合は、配列の中の通し番号（配列要素番号）を指定して行う。</li>
+            <li>2次元配列は配列要素番号を2個持ち、表（行と列）を格納できる</li>
+            <li>文字列型は「文字型」の配列である。</li>
+          </ul>
+          <p><strong><ruby style="color:#ff1493;">var<rt>宣言</rt></ruby> <ruby>name<rt>配列名</rt></ruby> = [<ruby>"A"<rt>[0]</rt></ruby>, <ruby>"B"<rt>[1]</rt></ruby>, <ruby>"C"<rt>[2]</rt></ruby>]</strong></p>
+          <p class="hosoku">[0][1][2]・・・の部分を配列要素番号という。</p>
+          <div class="sample">
+            <p class="title">SAMPLE</p>
+            <p>var myname = ["山田", "鈴木", "田中"];<br>
+              var age = [20, 40, 35];<br>
+              var gender = ["男", "女", "男"];<br>
+              var i = 1;<br>
+              alert(myname[i]+"さん("+gender[i]+")の年齢は"+age[i]+"歳です");</p>
+              <p>【結果（アラート）】<br>
+                鈴木さん（女）の年齢は40歳です</p>
+              <p class="hosoku">配列番号には変数を用いることが可能。</p>
+          </div>
+          <div class="sample">
+            <p class="title">SAMPLE（2次元配列）</p>
+            <p>var meibo = [<br>
+              &emsp;[1, "山田", 24, "男性", "東京"],<br>
+              &emsp;[2, "鈴木", 30, "男性", "神奈川"],<br>
+              &emsp;[3, "田中", 45, "女性", "埼玉"]<br>
+              ];<br>
+              var i=2;<br>
+              alert(<br>
+              &emsp;"会員番号"+meibo[i][0]+<br>
+              &emsp;"番の"+meibo[i][1]+<br>
+              &emsp;"さん("+meibo[i][2]+<br>
+              &emsp;")は、"+meibo[i][4]+<br>
+              &emsp;"県にお住まいです"<br>
+              );</p>
+              <p>【結果（アラート）】<br>
+                会員番号3番の田中さん(45)は、埼玉県にお住まいです</p>
+          </div>
+          <div class="sample">
+            <p class="title">SAMPLE（文字列型）</p>
+            <p>var moji="あいうえお"<br>
+              alert(moji[1]);</p>
+            <p>【結果（アラート）】<br>
+              い</p>
+          </div>
+        </dd>
+      </dl>
+    </article>
+    <article>
+      <h2>第3章 データ構造</h2>
+      <dl>
+        <dt>データ構造とは</dt>
+        <dd>大量のデータを効率よく管理（登録、更新、削除、検索）する仕組み</dd>
+        <dt>データ構造の概念（5種類）</dt>
+        <dd>
+          <ul>
+            <li>配列</li>
+            <li>リスト</li>
+            <li>スタック</li>
+            <li>キュー</li>
+            <li>ツリー</li>
+          </ul>
+          <h3 class="mt30">スタック</h3>
+          <p>データを登録した順番と逆順でデータを取り出す。<br>
+            LIFO、FILO、先入れ後出し</p>
+          <p class="hosoku">例：Git、GitHubなど</p>
+          <h3>キュー</h3>
+          <p>データを登録した順番通りデータを取り出す。<br>
+            FIFO、LILO、先入れ先出し</p>
+          <p class="hosoku">例：プリンターの印刷</p>
+        </dd>
+      </dl>
+    </article>
+  </main>
+  </div>
+</body>
+</html>
