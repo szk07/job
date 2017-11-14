@@ -14,48 +14,56 @@
   <div class="contents">
   <main>
    <form action="#" method="post">
-    <dl class="reservation">
-     <dt>日程</dt>
-     <dd>
-       <input type="date" name="schedule" id="schedule" required>
-       <select name="days" id="days" required>
-        <option value="1泊">1泊</option>
-        <option value="2泊">2泊</option>
-        <option value="3泊">3泊</option>
-        <option value="4泊">4泊</option>
-        <option value="5泊">5泊</option>
-      </select>
-    </dd>
-     <dt><label for="people">人数<span>1部屋あたり</span></label></dt>
-     <dd>
-      <select name="people" id="people" required>
-        <option value="1人">1人</option>
-        <option value="2人">2人</option>
-        <option value="3人">3人</option>
-        <option value="4人">4人</option>
-      </select>
-      <select name="room" id="room" required>
-       <option value="1部屋">1部屋</option>
-       <option value="2部屋">2部屋</option>
-      </select>
-      <label for="child"><input type="checkbox" name="age" id="child" value="小学生">小学生</label>
-      <label for="infants"><input type="checkbox" name="age" id="infants" value="幼児">幼児</label>
-      <!-- <div class="multi">2部屋以上選択時の時のみ表示</div> -->
-     </dd>
-     <dt>食事</dt>
-     <dd>
-      <label for="meal0"><input type="radio" name="meal" id="meal0" value="なし" required>素泊まり</label>
-      <label for="meal1"><input type="radio" name="meal" id="meal1" value="朝のみ">朝食のみ</label>
-      <label for="meal2"><input type="radio" name="meal" id="meal2" value="朝夕">朝夕</label>
-     </dd>
-     <dt>チェックイン</dt>
-     <dd><select name="checkin" id="checkin" required>
-         <option value="15時">15時</option>
-         <option value="16時">16時</option>
-         <option value="17時">17時</option>
-         <option value="18時">18時</option>
-       </select></dd>
-    </dl>
+    <div class="reservation">
+      <dl>
+        <dt>日程</dt>
+        <dd>
+          <input type="date" name="schedule" id="schedule" required>
+          <select name="days" id="days" required>
+           <option value="1泊">1泊</option>
+           <option value="2泊">2泊</option>
+           <option value="3泊">3泊</option>
+           <option value="4泊">4泊</option>
+           <option value="5泊">5泊</option>
+          </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt><label for="people">人数<span>1部屋あたり</span></label></dt>
+        <dd>
+         <select name="people" id="people" required>
+           <option value="1人">1人</option>
+           <option value="2人">2人</option>
+           <option value="3人">3人</option>
+           <option value="4人">4人</option>
+         </select>
+         <select name="room" id="room" required>
+          <option value="1部屋">1部屋</option>
+          <option value="2部屋">2部屋</option>
+         </select>
+         <label for="child"><input type="checkbox" name="age" id="child" value="小学生">小学生</label>
+         <label for="infants"><input type="checkbox" name="age" id="infants" value="幼児">幼児</label>
+         <!-- <div class="multi">2部屋以上選択時の時のみ表示</div> -->
+        </dd>
+      </dl>
+      <dl>
+        <dt>食事</dt>
+        <dd>
+         <label for="meal0"><input type="radio" name="meal" id="meal0" value="なし" required>素泊まり</label>
+         <label for="meal1"><input type="radio" name="meal" id="meal1" value="朝のみ">朝食のみ</label>
+         <label for="meal2"><input type="radio" name="meal" id="meal2" value="朝夕">朝夕</label>
+        </dd>
+      </dl>
+      <dl>
+        <dt>チェックイン</dt>
+        <dd><select name="checkin" id="checkin" required>
+            <option value="15時">15時</option>
+            <option value="16時">16時</option>
+            <option value="17時">17時</option>
+            <option value="18時">18時</option>
+          </select></dd>
+      </dl>
+    </div>
     <div class="total">
       <dl>
         <dt>宿泊料金</dt>
@@ -67,33 +75,44 @@
         </dd>
       </dl>
     </div>
-    <dl class="personal">
-      <dt>お名前</dt>
-      <dd><dl>
-        <dt><label for="lastName">姓</label></dt>
-        <dd><input type="text" name="lastname" id="lastName" maxlength="15" required></dd>
-        <dt><label for="firstName">名</label></dt>
-        <dd><input type="text" name="firstName" id="firstName" maxlength="15" required></dd>
-      </dl></dd>
-      <dd><dl>
-        <dt><label for="lastName-kana">せい</label></dt>
-        <dd><input type="text" name="lastname-kana" id="lastName-kana" maxlength="15" required></dd>
-        <dt><label for="firstName-kana">めい</label></dt>
-        <dd><input type="text" name="firstName-kana" id="firstName-kana" maxlength="15" required></dd>
-      </dl></dd>
-      <dt>ご連絡先<span>当日ご連絡の取れる番号をご記入ください</span></dt>
-      <dd><input type="tel" name="tel" id="tel" maxlength="20" required></dd>
-      <dt>メールアドレス</dt>
-      <dd><input type="email" name="email" id="email" maxlength="50" required></dd>
-      <dt>支払い</dt>
-      <dd>
-        <label for="local"><input type="radio" id="local" name="pay" value="現地" checked>現地決済（現金・クレジット）</label>
-        <label for="online"><input type="radio" id="online" name="pay" value="事前">事前決済（クレジット）</label>
-      </dd>
-    </dl>
+    <div class="personal">
+      <dl>
+        <dt>お名前</dt>
+        <dd><dl>
+          <dt><label for="lastName">姓</label></dt>
+          <dd><input type="text" name="lastname" id="lastName" maxlength="15" required></dd>
+          <dt><label for="firstName">名</label></dt>
+          <dd><input type="text" name="firstName" id="firstName" maxlength="15" required></dd>
+        </dl></dd>
+        <dd><dl>
+          <dt><label for="lastName-kana">せい</label></dt>
+          <dd><input type="text" name="lastname-kana" id="lastName-kana" maxlength="15" required></dd>
+          <dt><label for="firstName-kana">めい</label></dt>
+          <dd><input type="text" name="firstName-kana" id="firstName-kana" maxlength="15" required></dd>
+        </dl></dd>
+      </dl>
+      <dl>
+        <dt>ご連絡先<span>当日ご連絡の取れる番号をご記入ください</span></dt>
+        <dd><input type="tel" name="tel" id="tel" maxlength="20" required></dd>
+      </dl>
+      <dl>
+        <dt>メールアドレス</dt>
+        <dd><input type="email" name="email" id="email" maxlength="50" required></dd>
+      </dl>
+      <dl>
+        <dt>支払い</dt>
+        <dd>
+          <label for="local"><input type="radio" id="local" name="pay" value="現地" checked>現地決済（現金・クレジット）</label>
+          <label for="online"><input type="radio" id="online" name="pay" value="事前">事前決済（クレジット）</label>
+        </dd>
+      </dl>
+    </div>
       <input type="submit" value="確認">
     </form>
   </main>
+  <footer>
+    <p>&copy; 民宿キャメロット</p>
+  </footer>
   </div>
 </div>
 </body>

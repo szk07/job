@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>繰り返し処理</title>
+</head>
+<body>
+<h1>繰り返し処理</h1>
+<!--
+<script>
+var cnt=0; //①制御変数の初期値を設定
+while (cnt<3==true) { //②継続条件を判定（「==true」は省略可）
+  alert("繰り返し"+cnt+"回目") //③繰り返す処理本体
+  cnt++; //④制御変数を1加算し、②に戻る
+}
+</script> -->
+
+<h2>一次元配列での名簿</h2>
+<table border="1" width="200">
+  <thead>
+    <tr>
+      <th>会員番号</th>
+      <th>氏名</th>
+      <th>性別</th>
+      <th>年齢</th>
+    </tr>
+  </thead>
+  <tbody>
+    <script>
+      var myname = ["山田", "鈴木", "田中", "高橋"];
+      var gender = ['男', '女', '男', '男'];
+      var age = [25, 35, 19, 47]
+
+      var cnt = 0;
+      var num = 1;
+      while(cnt<myname.length){ //.lengthでプロパティの値を取得
+        window.document.write(
+          "<tr><td>"+num+
+          "</td><td>"+myname[cnt]+
+          "</td><td>"+gender[cnt]+
+          "</td><td>"+age[cnt]+
+          "</td></tr>" );
+        cnt++;
+        num++;
+      }
+    </script>
+  </tbody>
+</table>
+
+<h2>二次元配列での名簿</h2>
+<table border="1" width="200">
+  <thead>
+    <tr>
+      <th>会員番号</th>
+      <th>氏名</th>
+      <th>性別</th>
+      <th>年齢</th>
+    </tr>
+  </thead>
+  <tbody>
+    <script>
+      var member = [
+        ["山田", "男", 25],
+        ["鈴木", "女", 35],
+        ["田中", "男", 19],
+        ["高橋", "男", 47]
+      ];
+      // var search = prompt("検索キーワード");
+      var cnt = 0;
+      while(cnt<member.length){
+        // if(member[cnt][1]==search){
+          window.document.write(
+            "<tr><td>"+cnt+
+            "</td><td>"+member[cnt][0]+
+            "</td><td>"+member[cnt][1]+
+            "</td><td>"+member[cnt][2]+
+            "</td></tr>"
+          );
+        // }
+        cnt++;
+      };
+    </script>
+  </tbody>
+</table>
+<h2>整数値の合計</h2>
+<script>
+// var SUM = 0;
+// var VALUE = 1;
+// var N = 5;
+//
+// while (VALUE<=N) {
+//   SUM = SUM + VALUE;
+//   VALUE++;
+// }
+// alert(SUM);
+</script>
+<h2>配列データの合計値</h2>
+<script>
+var data = [40, 13, 89, 52, 7, 32, 20, 61, 19, 29, 47, 86];
+var SUM = 0;
+var I = 0;
+var N = 12;
+
+while(I<N) {
+  SUM = SUM+data[I];
+  I++;
+}
+alert(SUM);
+</script>
+</body>
+</html>
