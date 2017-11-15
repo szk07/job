@@ -56,32 +56,41 @@ header h1 {
 main {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
-  max-width: 700px;
+  max-width: 650px;
   margin: 0 auto 80px;
-  padding: 10px 20px;
+  padding: 30px 60px 10px;
 }
 
 form dl {
-  display: flex;
+  margin: 10px 0 20px;
 }
 
-form dl dt {
-  text-align: right;
-  width: 100px;
+form dt {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-form dl dt span {
-  display: block;
-  font-size: 1.1rem;
-}
-
-form dl dd {
+form dd {
   margin: 0;
+}
+
+form input {
+  background: none;
+  border: none;
+}
+
+form input[type="date"], form input[type="text"], form input[type="tel"], form input[type="email"] {
+  border-bottom: 1px solid #000;
+  width: 300px;
+  height: 35px;
+}
+
+form input[type="date"]::after, form input[type="text"]::after, form input[type="tel"]::after, form input[type="email"]::after {
+  content: "";
 }
 
 form input[type="submit"] {
   display: block;
-  background: none;
   border: 2px solid #000;
   text-align: center;
   text-indent: 1em;

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>繰り返し処理</title>
+</head>
+<body>
+<h1>繰り返し処理2</h1>
+<h2>二次元配列</h2>
+<script>
+var TEN=[
+  ["A",40,70,85],
+  ["B",60,90,70],
+  ["C",95,100,90],
+  ["D",72,55,65],
+  ["E",85,50,80]
+];
+var i=0;
+var n=TEN.length;
+
+while (i<n) {
+  TEN[i][4] = 0;
+  var j=1;
+  while (j<4) {
+    TEN[i][4] = TEN[i][4]+TEN[i][j];
+    j++;
+  }
+  i++;
+}
+alert(
+  TEN[0][0]+"さんの合計点"+TEN[0][4]+"点\n"+
+  TEN[1][0]+"さんの合計点"+TEN[1][4]+"点\n"+
+  TEN[2][0]+"さんの合計点"+TEN[2][4]+"点\n"+
+  TEN[3][0]+"さんの合計点"+TEN[3][4]+"点\n"+
+  TEN[4][0]+"さんの合計点"+TEN[4][4]+"点"
+);
+</script>
+<table border="1" width="500">
+  <thead>
+    <tr>
+      <th>氏名</th>
+      <th>英語</th>
+      <th>数学</th>
+      <th>国語</th>
+      <th>合計点</th>
+    </tr>
+  </thead>
+  <tbody>
+  <script>
+  var cnt=0;
+  while (cnt<n) {
+    window.document.write(
+      "<tr><td>"
+      +TEN[cnt][0]+"さん</td><td>"
+      +TEN[cnt][1]+"点</td><td>"
+      +TEN[cnt][2]+"点</td><td>"
+      +TEN[cnt][3]+"点</td><td>"
+      +TEN[cnt][4]+"点</td></tr>"
+    );
+    cnt++;
+  }
+  </script>
+  </tbody>
+</table>
+</body>
+</html>
