@@ -72,14 +72,24 @@ form{
   input{
     background: none;
     border: none;
+    font-size: 1.8rem;
     &[type="date"]{
-      border-bottom: 1px solid #000;
-      width: 300px;
-      height: 35px;
-      &::after{
-        content: "";
+      background: rgba(0, 0, 0, 0.05);
+      width: 250px;
+      height: 30px;
+      margin: 5px 10px 20px 0;
+      &::-webkit-inner-spin-button{
+        -webkit-appearance: none;
       }
     }
+
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
     &[type="text"]{
       @extend input[type="date"];
     }
@@ -91,10 +101,14 @@ form{
     }
     &[type="submit"]{
       display: block;
-      border: 2px solid #000;
+      background: #2581c4;
+      border: 2px solid #2581c4;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1.6rem;
       text-align: center;
       text-indent: 1em;
-      font-weight: bold;
+      font-weight: 300;
       letter-spacing: 1em;
       width: 300px;
       height: 45px;
@@ -102,8 +116,7 @@ form{
       transition: .3s;
       cursor: pointer;
       &:hover{
-        background: #000;
-        color: #fff;
+        background: #3c9ec1;
       }
     }
   }

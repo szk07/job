@@ -105,7 +105,100 @@ while(I<N) {
   SUM = SUM+data[I];
   I++;
 }
-alert(SUM);
+// alert(SUM);
 </script>
+<h2>合計点と平均値</h2>
+<script>
+var TEN = [40,13,89,52,-1];
+var COUNT = 0;
+var SUM = 0;
+var i = 0;
+
+while(TEN[i]!=-1){ //「!=」等しくない
+  COUNT++;
+  SUM = SUM+TEN[i]
+  i++;
+  AVE = SUM/COUNT;
+}
+// alert(AVE);
+</script>
+<h2>最高値</h2>
+<script>
+var TEN = [40,13,89,52,7];
+var n = TEN.length;
+var max=-1;
+var i=0;
+
+while (i<n) {
+  if (TEN[i]>max) {
+    max = TEN[i];
+  }
+  i++;
+}
+// alert(max);
+</script>
+<h2>最小値</h2>
+<script>
+var TEN = [40,13,89,52,7];
+var n = TEN.length;
+var min=1000;
+var i=0;
+
+while (i<n) {
+  if (TEN[i]<min) {
+    min = TEN[i];
+  }
+  i++;
+}
+// alert(min);
+</script>
+<h2>配列データの順位付け</h2>
+<script>
+var TEN = [40,13,89,52,7];
+var RANK = [1,1,1,1,1];
+var n = TEN.length;
+var i = 0;
+
+while (i<n) {
+  var j = 0;
+  while (j<n) {
+    if (TEN[i]<TEN[j]) {
+      RANK[i]++;
+    }
+    j++;
+  }
+  i++;
+}
+alert(
+  "1人目"+TEN[0]+"点："+RANK[0]+"位\n"+
+  "2人目"+TEN[1]+"点："+RANK[1]+"位\n"+
+  "3人目"+TEN[2]+"点："+RANK[2]+"位\n"+
+  "4人目"+TEN[3]+"点："+RANK[3]+"位\n"+
+  "5人目"+TEN[4]+"点："+RANK[4]+"位"
+);
+</script>
+<table border="1" width="300">
+  <thead>
+    <tr>
+      <th>氏名</th>
+      <th>得点</th>
+      <th>順位</th>
+    </tr>
+  </thead>
+  <tbody>
+  <script>
+  var cnt = 0;
+  while (cnt<n) {
+    window.document.write(
+      "<tr><td>"
+      +(cnt+1)+"人目</td><td>"
+      +TEN[cnt]+"点</td><td>"
+      +RANK[cnt]+"位</td></tr>"
+    );
+    cnt++;
+  }
+  </script>
+  </tbody>
+</table>
 </body>
 </html>

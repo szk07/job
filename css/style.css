@@ -77,24 +77,36 @@ form dd {
 form input {
   background: none;
   border: none;
+  font-size: 1.8rem;
 }
 
 form input[type="date"], form input[type="text"], form input[type="tel"], form input[type="email"] {
-  border-bottom: 1px solid #000;
-  width: 300px;
-  height: 35px;
+  background: rgba(0, 0, 0, 0.05);
+  width: 250px;
+  height: 30px;
+  margin: 5px 10px 20px 0;
 }
 
-form input[type="date"]::after, form input[type="text"]::after, form input[type="tel"]::after, form input[type="email"]::after {
-  content: "";
+form input[type="date"]::-webkit-inner-spin-button, form input[type="text"]::-webkit-inner-spin-button, form input[type="tel"]::-webkit-inner-spin-button, form input[type="email"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+form input input[type="number"]::-webkit-outer-spin-button,
+form input input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 form input[type="submit"] {
   display: block;
-  border: 2px solid #000;
+  background: #2581c4;
+  border: 2px solid #2581c4;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.6rem;
   text-align: center;
   text-indent: 1em;
-  font-weight: bold;
+  font-weight: 300;
   letter-spacing: 1em;
   width: 300px;
   height: 45px;
@@ -104,8 +116,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-  background: #000;
-  color: #fff;
+  background: #3c9ec1;
 }
 
 footer {
