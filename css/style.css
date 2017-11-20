@@ -91,10 +91,9 @@ form input[type="date"]::-webkit-inner-spin-button, form input[type="text"]::-we
   -webkit-appearance: none;
 }
 
-form input input[type="number"]::-webkit-outer-spin-button,
-form input input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+form input[type="date"]::-webkit-calendar-picker-indicator, form input[type="text"]::-webkit-calendar-picker-indicator, form input[type="tel"]::-webkit-calendar-picker-indicator, form input[type="email"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  position: relative;
 }
 
 form input[type="submit"] {

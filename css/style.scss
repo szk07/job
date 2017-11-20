@@ -81,15 +81,11 @@ form{
       &::-webkit-inner-spin-button{
         -webkit-appearance: none;
       }
+      &::-webkit-calendar-picker-indicator{
+        color: transparent;
+        position: relative;
+      }
     }
-
-
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
     &[type="text"]{
       @extend input[type="date"];
     }
