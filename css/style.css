@@ -80,18 +80,31 @@ form input {
   font-size: 1.8rem;
 }
 
-form input[type="date"], form input[type="text"], form input[type="tel"], form input[type="email"] {
+form label[for="schedule"] {
+  position: relative;
+}
+
+form label[for="schedule"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+form label[for="schedule"] input {
   background: rgba(0, 0, 0, 0.05);
   width: 250px;
   height: 30px;
   margin: 5px 10px 20px 0;
 }
 
-form input[type="date"]::-webkit-inner-spin-button, form input[type="text"]::-webkit-inner-spin-button, form input[type="tel"]::-webkit-inner-spin-button, form input[type="email"]::-webkit-inner-spin-button {
+form label[for="schedule"] input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-form input[type="date"]::-webkit-calendar-picker-indicator, form input[type="text"]::-webkit-calendar-picker-indicator, form input[type="tel"]::-webkit-calendar-picker-indicator, form input[type="email"]::-webkit-calendar-picker-indicator {
+form label[for="schedule"] input::-webkit-calendar-picker-indicator {
   color: transparent;
   position: relative;
 }
@@ -99,7 +112,7 @@ form input[type="date"]::-webkit-calendar-picker-indicator, form input[type="tex
 form input[type="submit"] {
   display: block;
   background: #2581c4;
-  border: 2px solid #2581c4;
+  border: 1px solid #2581c4;
   border-radius: 5px;
   color: #fff;
   font-size: 1.6rem;

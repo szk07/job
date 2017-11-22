@@ -73,7 +73,18 @@ form{
     background: none;
     border: none;
     font-size: 1.8rem;
-    &[type="date"]{
+  }
+  label[for="schedule"]{
+    position: relative;
+    &::before{
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 5px;
+      width: 50px;
+      height: 50px;
+    }
+    input{
       background: rgba(0, 0, 0, 0.05);
       width: 250px;
       height: 30px;
@@ -86,19 +97,18 @@ form{
         position: relative;
       }
     }
+  }
+  input{
     &[type="text"]{
-      @extend input[type="date"];
     }
     &[type="tel"]{
-      @extend input[type="date"];
     }
     &[type="email"]{
-      @extend input[type="date"];
     }
     &[type="submit"]{
       display: block;
       background: #2581c4;
-      border: 2px solid #2581c4;
+      border: 1px solid #2581c4;
       border-radius: 5px;
       color: #fff;
       font-size: 1.6rem;
