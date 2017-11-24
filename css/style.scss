@@ -95,6 +95,10 @@ form{
       &::-webkit-calendar-picker-indicator{
         color: transparent;
         position: relative;
+        &::before{
+          content: '\f274';
+          top: 0;
+        }
       }
     }
   }

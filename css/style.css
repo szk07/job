@@ -109,6 +109,11 @@ form label[for="schedule"] input::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
+form label[for="schedule"] input::-webkit-calendar-picker-indicator::before {
+  content: '\f274';
+  top: 0;
+}
+
 form input[type="submit"] {
   display: block;
   background: #2581c4;
