@@ -50,7 +50,7 @@ header{
   height: 100%;
   padding: 80px 20px 20px 20px;
 }
-main{
+#main{
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
   max-width: 650px;
@@ -77,29 +77,41 @@ form{
   label[for="schedule"]{
     position: relative;
     &::before{
-      content: "";
+      content: "\f274";
+      font-family: FontAwesome;
+      font-size: 18px;
+      color: #3f3f3f;
+      text-align: center;
       position: absolute;
-      top: 0;
-      right: 5px;
-      width: 50px;
-      height: 50px;
+      top: -3px;
+      right: 10px;
+      padding: 3px 13px 5px;
     }
     input{
+      position: relative;
       background: rgba(0, 0, 0, 0.05);
+      color: #888;
       width: 250px;
       height: 30px;
       margin: 5px 10px 20px 0;
-      &::-webkit-inner-spin-button{
+      padding: 5px;
+      &::-webkit-inner-spin-button,
+      &::-webkit-clear-button{
         -webkit-appearance: none;
       }
       &::-webkit-calendar-picker-indicator{
+        position: absolute;
+        background: transparent;
         color: transparent;
-        position: relative;
-        &::before{
-          content: '\f274';
-          top: 0;
-        }
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 30px;
+        cursor: pointer;
       }
+    }
+    ::-ms-clear{
+      display: none;
     }
   }
   input{
