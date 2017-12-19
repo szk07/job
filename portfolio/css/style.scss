@@ -1,12 +1,14 @@
-body {
-  background: #f6f6f6;
+@charset "UTF-8";
+
+body{
+  background:#f6f6f6;
   background-image: url(../imgs/bg.png);
   margin: 0;
   padding: 0;
   height: 1000px;
 }
 
-#line {
+#line{
   position: absolute;
   box-sizing: border-box;
   border: 20px solid #fff;
@@ -15,7 +17,6 @@ body {
   width: 100vw;
   height: 100vh;
 }
-
-#wrapper {
+#wrapper{
   padding: 20px;
 }
