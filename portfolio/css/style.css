@@ -1,21 +1,24 @@
+html::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 10px solid #fff;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  html::before {
+    border: 20px solid #fff;
+  }
+}
+
 body {
   background: #f6f6f6;
   background-image: url(../imgs/bg.png);
   margin: 0;
-  padding: 0;
+  padding: 30px 50px;
   height: 1000px;
-}
-
-#line {
-  position: absolute;
-  box-sizing: border-box;
-  border: 20px solid #fff;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-#wrapper {
-  padding: 20px;
 }
