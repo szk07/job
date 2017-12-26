@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+<h1>Chapter01-01 プロトタイプ・解説</h1>
+<h2>JavaScriptの基本</h2>
+<p>JavaScriptはオブジェクトが基本であり、扱うのものはほとんどが「オブジェクト」である。<br>
+<p class="subTitle">オブジェクトとは</p>
+<ul>
+  <li>「キー（プロパティ）」と「値」の組み合わせによる連想配列</li>
+  <li>文字、数、配列等→すべてオブジェクトとして扱う</li>
+</ul>
+<p class="subTitle">プロパティとは</p>
+<ul>
+  <li>オブジェクトの設定情報がプロパティ</li>
+  <li>コンストラクタ関数に属していれば独自のプロパティを設定することが可能<br>
+  →コンストラクタ関数の宣言時や所属するメソッド内で設定できる</li>
+</ul>
+<p class="subTitle">プロトタイプ（prototype）とは</p>
+<ul>
+  <li>JavaScriptに用意されているプロパティのひとつ</li>
+  <li>同じ処理（メソッド）をグループ化し、再利用や拡張を可能にする</li>
+</ul>
+<h2>コード解説</h2>
+<pre><code>function Human(name) {
+  this.name = name;
+};
+Human.prototype.greet = function() {
+  console.log("Hello " + this.name);
+};
+var mike = new Human("Mike");
+mike.greet(); //Hello Mike
+</pre></code>
+<h3>コンストラクタ関数を定義（オブジェクトの初期化）</h3>
+<pre><code>function Human(name) {
+  this.name = name;
+};</code></pre>
+<p class="import">function 関数名(引数){ this.変数 = 引数; };</p>
+<ul>
+	<li>「Human」は任意のコンストラクタ関数名。</li>
+  <li>this.変数のthisは親のコンストラクタ関数名のこと。<br>
+  →Humanに所属する変数「this.name」に引数（name）を代入する</li>
+</ul>
+<p>複数定義することも可能。</p>
+<pre><code>function Human(name, age) {
+  this.name = name;
+  this.age = age;
+};</code></pre>
+<ul>
+  <li>Humanに所属する変数「this.name」に引数（name）を代入する</li>
+  <li>Humanに所属する変数「this.age」に引数（age）を代入する</li>
+</ul>
+
+<h3>メソッドを定義する</h3>
+<pre><code>Human.prototype.greet = function() {
+  console.log("Hello " + this.name);
+};</code></pre>
+<p class="import">コンストラクタ関数.prototype.メソッド名 = function(){処理内容};</p>
+<ul>
+	<li>「greet」は任意のメソッド名。</li>
+	<li>同一のコンストラクタ関数を用いて複数のメソッドを定義することができる</li>
+	<li>メソッドは処理内容のグループ化。</li>
+</ul>
+
+<h3>オブジェクト変数宣言</h3>
+<pre><code>var mike = new Human("Mike");</code></pre>
+<p class="import">var オブジェクト変数名 = new コンストラクタ関数(引数);</p>
+<ul>
+	<li>実行コマンドから最初に呼び出される</li>
+	<li>コンストラクタ関数からnew演算子でオブジェクト変数を生成する</li>
+	<li>オブジェクト変数は同じコンストラクタ関数に用意されたメソッドが利用できる</li>
+</ul>
+<h3>実行コマンド</h3>
+<pre><code>mike.greet();</code></pre>
+<p class="import">オブジェクト変数名.メソッド名();</p>
+<ul>
+  <li>一番最初に実行する</li>
+</ul>
+<div class="ex">
+<h3>Ex.コンストラクタ関数とは</h3>
+<ul>
+	<li>プログラムのひな形、設計図と呼ばれる。（Java言語ではクラスと呼ぶ）</li>
+	<li>プログラムで必要となる変数を用意するだけで中身は空。<br>
+	→独自で作動できない。</li>
+	<li>new演算子で変数を作成すると空の変数へ情報を取り込んで「オブジェクト」を生成する<br>
+	→ここで生成された変数が「<em>オブジェクト変数</em>」<br>
+	→生成されたオブジェクトが用意されたメソッドを実行したらオブジェクト変数は消える</li>
+	<li>コンストラクタ関数はひたすらオブジェクトを生成することが仕事。</li>
+</ul>
+</div>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../sample/Chapter1/chp01-01/01/app.js"></script>
+  </body>
+</html>

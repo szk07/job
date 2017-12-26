@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>modal-window</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<h1>Chapter02-04</h1>
+<ul>
+  <li><a href="../../sample/Chapter2/chp02-04/03/index.html" target="_blank">完成ファイル</a></li>
+  <li><a href="chp02-04_ﾁｪｯｸｱﾗｰﾄ/index.html" target="_blank">完成ファイル（アラート付き）</a></li>
+  <li><a href="../../sample/Chapter2/chp02-04/03/scripts/app.js" target="_blank">app.js</a></li>
+</ul>
+<h2>実行部分</h2>
+<h3>オブジェクト変数宣言（101行目）</h3>
+<pre><code>var modal = new Modal($("#modal-thumb a"));</code></pre>
+<p>コンストラクタ関数「Modal」からオブジェクト変数「modal」を宣言。<br>
+引数は"#modal-thumb"内のaタグ。</p>
+<h2>設計部分</h2>
+<h3>コンストラクタ関数「Modal」の定義＆メソッド実行</h3>
+<pre><code>function Modal(el) {
+  this.initialize(el);
+}</code></pre>
+<div class="com">
+  <pre><code>function Modal(el) { ... }</code></pre>
+  <p>コンストラクタ関数「Modal」を定義。<br>
+  引数（el）は選択された"#modal-thumb"のaタグ</p>
+  <pre><code>this.initialize(el);</code></pre>
+  <p><a href="#line5">initializeメソッド（5行目）</a>を実行。<br>
+  ここでのthisはModalを指すため、実行コマンドのModal.initialize();と同義になる。</p>
+</div>
+<h3 id="line5">initializeメソッド（5行目）</h3>
+<pre><code>Modal.prototype.initialize = function(el) {
+  this.$el = el;
+  this.$container = $("#modal");
+  this.$contents = $("#modal-contents");
+
+  // 削除
+  // this.$close = $("#modal-close");
+  // this.$next = $("#modal-next");
+  // this.$prev = $("#modal-prev");
+
+  this.$overlay = $("#modal-overlay");
+  this.$parents = this.$el.parents("ul");
+  this.$window = $(window);
+  this.handleEvents();
+};</code></pre>
+<div class="com">
+  <pre><code>this.$el = el;</code></pre>
+  <p>引数el（"#modal-thumb"のaタグ）をthis.$elに代入</p>
+  <pre><code>this.$container = $("#modal");
+this.$contents = $("#modal-contents");
+
+  略（コメントアウト／名残の記述文）
+
+this.$overlay = $("#modal-overlay");
+this.$parents = this.$el.parents("ul");
+this.$window = $(window);</code></pre>
+  <p>モーダルウィンドウを制御するのに必要な各要素をそれぞれ変数に代入</p>
+  <pre><code>this.handleEvents();</code></pre>
+  <p><a href="#line21">handleEventsメソッド（21行目）</a>を実行</p>
+</div>
+<h3 id="line21">handleEventsメソッド（21行目）</h3>
+<pre><code>Modal.prototype.handleEvents = function() {
+  var self = this;
+  this.$parents.on("click", "a" , function(e) {
+    self.show(e);
+    return false;
+  });
+
+  this.$container.on("click", "#modal-next", function(e)　{
+    self.next(e);
+    return false;
+  });
+  this.$container.on("click", "#modal-prev", function(e) {
+    self.prev(e);
+    return false;
+  });
+  this.$container.on("click", "#modal-close", function(e) {
+    self.hide(e);
+    return false;
+  });
+
+  this.$overlay.on("click", function(e) {
+    self.hide(e);
+    return false;
+  });
+
+  this.$window.on("load resize", function(){
+    self.resize();
+  });
+
+};</code></pre>
+<div class="com">
+  <pre><code>var self = this;</code></pre>
+  <p>jQueryとJavaScriptの「this」使い分け用変数。<br>
+  jQuery内でJavaScriptのthisを使用したい場合は変数に代入したthisを用いる。</p>
+  <pre><code>this.$parents.on("click", "a" , function(e) {
+    self.show(e);
+    return false;
+  });</code></pre>
+  <ul>
+    <li>this.$parentsの中身<br>
+    　→this.$parents変数の中身＝this.$el.parents("ul")（16行目）<br>
+    　→this.$elの中身＝引数el（6行目）<br>
+    　→引数elの中身＝"#modal-thumb"のaタグ（101行目）<br>
+    　→"#modal-thumb"のaタグの親のulタグ</li>
+    <li>.onメソッドでDOMに"click"イベントを登録<br>
+    →子孫要素（aタグ）を指定してイベントデリゲートする</li>
+    <li>self.show(e);<br>
+    →<a href="#line52">showメソッド（52行目）</a>を実行。引数にイベント（今回だとclick）を渡す。</li>
+    <li>return false;<br>
+      →aタグの動作を停止する</li>
+  </ul>
+  <pre><code>this.$container.on("click", "#modal-next", function(e)　{
+  self.next(e);
+  return false;
+});
+this.$container.on("click", "#modal-prev", function(e) {
+  self.prev(e);
+  return false;
+});
+this.$container.on("click", "#modal-close", function(e) {
+  self.hide(e);
+  return false;
+});</code></pre>
+  <ul>
+    <li>this.$containeの中身＝$("#modal");</li>
+    <li>.onメソッドでDOMに"click"イベントをそれぞれ登録<br>
+    →<a href="#line84">nextメソッド（84行目）、prevメソッド（88行目）</a>、<a href="#line64">hideメソッド（64行目）</a></li>
+  </ul>
+  <div class="ex">
+    <ul>
+      <li><strong>.parents()</strong><br>
+      セレクトしたすべての親要素を取得するjQuery</li>
+      <li><strong>.on()</strong><br>
+      オブジェクトにイベント処理を紐付けることができるjQuery<br>
+      参考：<a href="https://qiita.com/katsunory/items/7b50d399329767a893e1" target="_blank">【jQuery】onメソッドの使用方法</a></li>
+      <li><strong>イベントデリゲート</strong><br>
+      イベントバブリングの特長を利用したイベント設定方法。<br>
+      子要素で発生したイベントがイベントバブリングにより親要素に伝播し、親要素で指定したスクリプトを実行することができる。ブラウザメモリなどを節約し処理が早くなる。<br>
+      参考：<a href="http://blog.webcreativepark.net/2013/12/01-215447.html" target="_blank">イベントデリゲートで理解するjQueryのonメソッド</a></li>
+    </ul>
+  </div>
+</div>
+<h3 id="line52">showメソッド（52行目）</h3>
+<pre><code>Modal.prototype.show = function(e) {
+  var $target = $(e.currentTarget),
+      src = $target.attr("href");
+  this.$contents.html("&lt;img src=\"" + src + "\" />");
+  this.$container.fadeIn();
+  this.$overlay.fadeIn();
+
+  var index = $target.data("index");
+  this.countChange = this.createCounter(index, this.$el.length);
+  return false;
+};</code></pre>
+<div class="com">
+  <pre><code>var $target = $(e.currentTarget),
+src = $target.attr("href");</code></pre>
+  <ul>
+    <li>$targetに$(e.currentTarget)（＝クリックされたaタグ）を代入</li>
+    <li>srcに$targetの"href"属性の値を代入</li>
+  </ul>
+  <pre><code>this.$contents.html("&lt;img src=\"" + src + "\" />");</code></pre>
+  <p>this.$contents（"#modal-contents"タグ）にimgタグを代入</p>
+  <pre><code>this.$container.fadeIn();
+this.$overlay.fadeIn();</code></pre>
+  <p>this.$container（"#modal"タグ）とthis.$overlay（"#modal-overlay"タグ）をフェードインする</p>
+  <pre><code>var index = $target.data("index");</code></pre>
+  <p>連想配列indexに$targetのカスタムデータ属性"index"（＝data-index）の値を代入</p>
+  <pre id="line60"><code>this.countChange = this.createCounter(index, this.$el.length);</code></pre>
+  <p>countChangeメソッドに<a href="#line78">createCounterメソッド（78行目）</a>の無名関数を代入<br>
+  →index：data-indexの値<br>
+  →this.$el.length：this.$el（"#modal-thumb"のaタグ）の数</p>
+  <div class="ex">
+    <ul>
+      <li><strong>$("セレクタ").html("値")</strong><br>
+      指定したセレクタの末尾に指定値を書き込む</li>
+      <li><strong>$("セレクタ").attr("属性");</strong><br>
+      指定したセレクタの属性の値を取得する</li>
+    </ul>
+  </div>
+</div>
+<h3 id="line78">createCounterメソッド（78行目）</h3>
+<pre><code>Modal.prototype.createCounter = function(index, len){
+  return function(num) {
+    return index = (index + num + len) % len;
+  };
+};</code></pre>
+<p>引数indexとlenが代入された状態の無名関数を返す</p>
+<div class="com">
+  <pre><code>return index = (index + num + len) % len;</code></pre>
+  <p>countChangeに計算結果のindexを返す</p>
+  <ul>
+    <li>index：表示している番号（data-index）</li>
+    <li>num：countChangeの引数</li>
+    <li>len：全体の数（"#modal-thumb"のaタグの数）</li>
+  </ul>
+</div>
+<h3 id="line84">nextメソッド（84行目）、prevメソッド（88行目）</h3>
+<pre><code>Modal.prototype.next = function() {
+  this.slide(this.countChange( 1 ));
+};</code></pre>
+<pre><code>Modal.prototype.prev = function() {
+  this.slide(this.countChange( -1 ));
+};</code></pre>
+<div class="com">
+  <pre><code>this.slide(this.countChange( 1 ));</code></pre>
+  <p><a href="#line69">slideメソッド（69行目）</a>の引数に<a href="#line60">countChangeメソッド（60行目）</a>の結果を入れる</p>
+</div>
+<h3 id="line69">slideメソッド</h3>
+<pre><code>Modal.prototype.slide = function(index) {
+  this.$contents.find("img").fadeOut({
+    complete: function() {
+      var src = $("[data-index=\"" + index + "\"]").find("img").attr("src");
+      $(this).attr("src", src).fadeIn();
+    }
+  });
+};</code></pre>
+<div class="com">
+  <pre><code>this.$contents.find("img").fadeOut( ... );</code></pre>
+  <p>this.$contents（"#modal-contents"）のimgタグを探してフェードアウトする</p>
+  <pre><code>.fadeOut({
+    complete: function() { ... }
+  });</code></pre>
+  <p>フェードアウトの処理が終わってから引数の処理を実行する（コールバック）</p>
+  <pre><code>var src = $("[data-index=\"" + index + "\"]").find("img").attr("src");</code></pre>
+  <p>srcに引数indexで受け取ったdata-indexのimgタグのsrc属性を代入する</p>
+  <pre><code>$(this).attr("src", src).fadeIn();</code></pre>
+  <p>this.$contentsのimgタグのsrc属性に変数srcの値を入れてフェードインする</p>
+  <div class="ex">
+    <ul>
+      <li><strong>コールバック</strong><br>
+      オプション。処理が完了してから引数の処理を実行する。<ul>
+        <li>書き方&#9312;<br>
+        $('セレクタ').fadeOut({ complete: function() { 処理 } });<br>
+        →completeを使う場合は{}で括る</li>
+        <li>書き方&#9313;<br>
+        $('セレクタ').fadeOut(function() { 処理 });</li>
+      </ul></li>
+      <li><strong>$("セレクタ").attr("属性", 変数);</strong><br>
+      選択したセレクタの指定属性に変数の値を入れる</li>
+    </ul>
+  </div>
+</div>
+<h3 id="line92">resizeメソッド</h3>
+<pre><code>Modal.prototype.resize = function() {
+  var w = this.$window.width();
+  if(w < 640){
+    this.$container.css({"width": "320","height":"213"});
+  }else{
+    this.$container.css({"width": "750","height":"500"});
+  }
+};</code></pre>
+<p>スマホ表示（640px未満）とPC表示の記述</p>
+<div class="com">
+  <pre><code>var w = this.$window.width();</code></pre>
+  <p>ウィンドウサイズを取得</p>
+</div>
+<h2>「もっと見るボタン」の処理（103行目）</h2>
+<pre><code>$("#more-btn").on("click", function() {
+  var html = '&lt;li>\
+    &lt;a href="images/photo-04.JPG" data-index="3">\
+      &lt;img alt="" src="images/photo-04.JPG" width="160" class="img-thumbnail">\
+    &lt;/a>\
+  </li>';
+  $(html).appendTo($("#modal-thumb")).hide().fadeIn();
+  $(this).fadeOut();
+  modal.$el = $("#modal-thumb a");
+});</code></pre>
+<div class="com">
+  <pre><code>$("#more-btn").on("click", function() { ... }</code></pre>
+  <p>"#more-btn"がクリックされたら処理を行う</p>
+  <pre><code>$(html).appendTo($("#modal-thumb")).hide().fadeIn();</code></pre>
+  <p>変数htmlを"#modal-thumb"に非表示（.hide）で追加する（.appendTo）、フェードインする（.fadeIn）</p>
+  <pre><code>$(this).fadeOut();</code></pre>
+  <p>"#more-btn"をフェードアウトする</p>
+  <pre><code>modal.$el = $("#modal-thumb a");</code></pre>
+  <p>modal.$elに"#modal-thumb"のaタグを代入<br>
+  →modal.$elに追加分を含めた"#modal-thumb"のaタグ情報を渡す</p>
+  <div class="ex">
+    <ul>
+      <li><strong>(A).appendTo(B)</strong><br>
+      BにAを追加する</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

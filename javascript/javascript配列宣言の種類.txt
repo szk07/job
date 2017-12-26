@@ -1,0 +1,23 @@
+＜JavaScript配列宣言＞
+① var test = new Array( '値' , '値' … );
+② var test = [ '値' , '値' … ];
+
+＜JavaScript連想配列宣言＞
+① var test = new Array( 'キー' => '値' , 'キー' => '値' …);
+② var test = { 'キー' : '値' , 'キー' : '値' … };
+
+
+配列宣言の例
+いままでの配列宣言の記述方法
+var test = new Array( '山田' , '23' , '東京都' );
+上記の宣言では、
+test[0]に「山田」、
+test[1]に「23」、
+test[2]に「東京都」が入っている。
+
+連想配列宣言の記述方法
+var test = { 'myname' : '山田' , 'age' : '23' , 'place' : '東京都' );
+上記の宣言では、
+test['myname']に「山田」、
+test['age']に「23」、
+test['place']に「東京都」が入っている。

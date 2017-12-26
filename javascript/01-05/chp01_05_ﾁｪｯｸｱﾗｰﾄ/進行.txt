@@ -1,0 +1,74 @@
+<起動直後>
+109行目：$("input").each(function() {
+jQueryによりinputタグの数だけ繰り返し
+AppView("input")を実行する。
+
+54行目：function AppView(el) {
+AppView("input")により、
+initialize(el)とhandleEvents()が作動する。
+
+59行目：AppView.prototype.initialize = function(el) {
+$elに引数inputタグのオブジェクトを代入。
+$listに、inputタグの次のタグ(ulタグ)の子供タグ(liタグ)を代入。
+変数objを宣言し、inputタグのdata属性の属性値を配列として代入。
+inputタグにrequired属性が存在していれば、obj["required"]にtrueを代入。
+コンストラクタAppModel(obj)のインスタンスmodelを生成。
+
+1行目：function AppModel(obj) {
+コンストラクタ変数valを宣言
+コンストラクタ連想配列attrsを宣言
+attrs["required"]にはobj["required"]の値を代入。存在しなければfalseを代入。
+attrs["maxlength"]にはobj["maxlength"]の値を代入。存在しなければ8を代入。
+attrs["minlength"]にはobj["minlength"]の値を代入。存在しなければ4を代入。
+コンストラクタ連想配列listenersを宣言(オブザーバ)
+listeners["valid"]は空。
+listeners["invalid"]は空。
+
+72行目：AppView.prototype.handleEvents = function() {
+keyupイベント発生時のイベントハンドラにonKeyup(e)を登録。
+validイベント発生時、32行目onメソッドでオブサーバーlistenersへ登録し
+onValid()が作動するように登録。
+invalidイベント発生時、32行目onメソッドでオブサーバーlistenersへ登録し
+onInValid()が作動するように登録。
+
+<キー入力時>
+75行目：this.$el.on("keyup", function(e) {
+keyupイベント発生、89行目のonValid()作動
+
+89行目：AppView.prototype.onKeyup = function(e) {
+変数$targetには、イベント発生したタグinputが代入される。
+14行目のsetへ、イベント発生したタグinputのvalue値が引数として代入。
+
+14行目：AppModel.prototype.set = function(inputのvalue値) {
+コンストラクタ変数へ、現在のvalue値を代入して確保。
+validate()実行。
+
+20行目AppModel.prototype.validate = function() {
+コンストラクタ連想配列errors準備
+24行目のfor文で、連想配列attrsの中身を１件づつ取り出す。
+最初にattrs["required"]の中をvalへ代入。
+26行目のif文でthis[key](val)から42行目required(true)が作動する。
+
+42行目：
+AppModel.prototype.required = function() {
+現在のinputタグのvalue値が空ならfalseを返却する。
+現在のinputタグのvalue値に値があればtrueを返却する。
+26行目のif文に戻り、!で戻り値を反転する。
+ifの判定結果より、trueなら、inputタグのvalue値が空欄のため、連想配列errorsにrequiredを登録。
+falseなら何もしない。
+同様に、46行目のmaxlength、50行目のminlengthも作動し、
+26行目で、trueとなった配列の添え字が連想配列errors代入される。
+for文の処理が終わり、29行目で、errorsに何もなければtrigger(valid)、
+何か入っていればtrigger(invalid)が作動する。
+
+36行目：AppModel.prototype.trigger = function(event) {
+引数がinvalidの場合、オブサーバーlisteners["invalid"]により、
+83行目invalidイベント発生となり、99行目onInvalid()が作動する。
+
+99行目：AppView.prototype.onInvalid = function() {
+thisはjQueryとして使用するため、AppViewを示すthisをselfへ代入して退避する。
+inputタグにclass="error"を設置して、エラー表示CSSを適用する。
+inputタグの次のliタグを全て非表示にする。
+連想配列errorsに格納されている値を呼び出し、文字列「data-(errorsの値)」を
+持つliタグのみ表示する。
+

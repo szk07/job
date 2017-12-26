@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>realtime-validation</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<h1>Chapter01-05 解説</h1>
+<p>作成済みのスクリプトを解読する。<br>
+  JavaScriptとjQueryを組み合わせたスクリプト。</p>
+<ul>
+  <li><a href="../../sample/Chapter1/chp01-05/06/index.html" target="_blank">完成ファイル</a></li>
+  <li><a href="chp01_05_ﾁｪｯｸｱﾗｰﾄ/index.html" target="_blank">完成ファイル（アラート付き）</a></li>
+  <li><a href="../../sample/Chapter1/chp01-05/06/scripts/app.js" target="_blank">app.js</a></li>
+</ul>
+<p class="subTitle">解読の手順</p>
+<ol>
+  <li>最初に起動するコードを探す<ol>
+    <li>プログラムの設計部分と実行部分に仕分ける<br>
+    設計部分：コンストラクタ宣言、メソッド宣言<br>
+    実行部分：それ以外</li>
+    <li>実行部分から探す</li>
+  </ol></li>
+  <li>最初に起動するコードから順にメソッドやコンストラクタ関数を追いかける</li>
+</ol>
+<h2>実行部分</h2>
+<h3>実行コマンド（109行目）</h3>
+<pre><code>$("input").each(function() {
+  new AppView(this);
+});</code></pre>
+<ul>
+  <li>最初に起動、inputの数だけ繰り返す</li>
+  <li>コンストラクタ関数「AppView」の定義コマンドを実行する</li>
+</ul>
+<div class="com">
+  <pre><code>new AppView(this);</code></pre>
+  <ul>
+    <li>コンストラクタ関数「AppView」のオブジェクト（インスタンス）を生成する</li>
+    <li>「AppView」の引数（this）はinputタグ</li>
+  </ul>
+</div>
+<div class="ex">
+  <ul>
+    <li>.each()<br>
+    →指定タグをその数だけ繰り返す（jQuery）</li>
+  </ul>
+</div>
+<h2>設計部分（AppView）</h2>
+<h3>コンストラクタ関数「AppView」を定義＆メソッドを実行（54行目）</h3>
+<pre><code>function AppView(el) {
+  this.initialize(el);
+  this.handleEvents();
+}</code></pre>
+<div class="com">
+  <pre><code>function AppView(el) {}</code></pre>
+  <p>→コンストラクタ関数「AppView」を定義</p>
+  <pre><code>this.initialize(el)</code></pre>
+  <p>→<a href="#line59">initializeメソッド（59行目）</a>を実行</p>
+  <pre><code>this.handleEvents();</code></pre>
+  <p>→<a href="#line72">handleEventsメソッド（72行目）</a>を実行</p>
+</div>
+
+<h3 id="line59">initializeメソッド（59行目）</h3>
+<pre><code>AppView.prototype.initialize = function(el) {
+  this.$el = $(el);
+  this.$list = this.$el.next().children();
+
+  var obj = this.$el.data();
+
+  if (this.$el.prop("required")) {
+    obj["required"] = true;
+  }
+
+  this.model = new AppModel(obj);
+};</code></pre>
+<div class="com">
+  <pre><code>this.$el = $(el);</code></pre>
+  <p>実行コマンドの引数（this＝inputタグ）を代入</p>
+  <pre><code>this.$list = this.$el.next().children();</code></pre>
+  <p>$elの次にあるタグ（ul）の子タグ（li）を代入</p>
+  <pre><code>var obj = this.$el.data();</code></pre>
+  <p>inputタグの中のdata属性の情報を取得し、objを連想配列として格納する</p>
+  <pre><code>if (this.$el.prop("required")) {
+  obj["required"] = true;
+}</code></pre>
+  <ul>
+    <li>.prop("required")で$elにrequiredがあるかを判定する</li>
+    <li>trueだったら連想配列objに["required"] = true;を格納する</li>
+  </ul>
+  <pre><code>this.model = new AppModel(obj);</code></pre>
+  <p></p>
+</div>
+<div class="ex">
+  <ul>
+    <li><strong>カスタムデータ属性（HTML）</strong><br>
+    →HTMLタグに独自のデータを扱う事ができるdata属性。<br>
+    HTMLに独自の値を用意してscriptにデータを渡すことが可能。<br>
+    【書き方】data-xxx="yyy"　（xxxを配列要素名、yyyを値として扱う）</li>
+  </ul>
+</div>
+
+//連想配列「obj」に格納されているのは
+//obj['maxlength']=8;
+//obj['minlength']=4;
+//obj["required"]=true;
+
+this.model = new AppModel(obj);
+→コンストラクタ関数「AppModel」のオブジェクトが生成される
+→「AppModel」の引数は連想配列obj
+
+<h3 id="line72">handleEventsメソッド（72行目）</h3>
+<pre><code>AppView.prototype.handleEvents = function() {
+  var self = this;
+
+  this.$el.on("keyup", function(e) {
+    self.onKeyup(e);
+  });
+
+  this.model.on("valid", function() {
+    self.onValid();
+  });
+
+  this.model.on("invalid", function() {
+    self.onInvalid();
+  });
+
+};</code></pre>
+<div class="com">
+  <pre><code>var self = this;</code></pre>
+  <p>JavaScriptとjQueryの使い分け用変数。<br>
+    javascriptの「this」は以後「self」として扱う。<br>
+    →jQuery文の中にthisをそのまま使用するとjQueryとしての動き（親タグ）を見てしまう。<br>
+    →javascriptとしてのthisをjQuery内で使用する場合はthisを変数に入れると使えるようになる（仕様）</p>
+  <pre><code>this.$el.on("keyup", function(e) {
+  self.onKeyup(e);
+});</code></pre>
+  <p>DOMイベント（keyup）へ登録。<br>
+  キーを叩いたらonKeyupメソッド(引数：e)を実行する</p>
+  <ul>
+    <li>変数「this.$el」の中身は「$("input").on」（60行目）</li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+  //対象タグ.on("イベントハンドラ", 処理);
+  //function(e)→イベント
+
+  this.model.on("valid", function() { //オブザーバーに登録
+    self.onValid(); //onValidメソッドを実行
+  });
+
+  this.model.on("invalid", function() { //オブザーバーに登録
+    self.onInvalid(); //onInvalidメソッドを実行
+  });
+
+};
+
+<h3>onKeyupメソッド（89行目）</h3>
+<p>キーが叩かれたらinputタグの入力値（val）を引数にしてsetメソッドを実行</p>
+<pre><code>AppView.prototype.onKeyup = function(e) {
+  var $target = $(e.currentTarget);
+  this.model.set($target.val());
+};</code></pre>
+<div class="com">
+  <pre><code>function(e)</code></pre>
+  <p>イベントハンドラの引数（今回だとkeyup）</p>
+  <pre><code>var $target = $(e.currentTarget);</code></pre>
+  <p>キーが叩かれたタグ（input）を「$target」に代入</p>
+  <pre><code>this.model.set($target.val());</code></pre>
+  <p>setメソッド（<a href="#line14">14行目</a>）を実行。<br>
+    引数「$target.val()」はキーが叩かれたinputタグの中身（val）</p>
+</div>
+<h3 id="line94">onValidメソッド（94行目）</h3>
+<p>【動き】inputタグからerrorクラスを外す。エラー文を非表示にする。</p>
+<pre><code>AppView.prototype.onValid = function() {
+  this.$el.removeClass("error");
+  this.$list.hide();
+};</code></pre>
+<div class="com">
+  <pre><code>this.$el.removeClass("error");</code></pre>
+  <p>this.$elから"error"クラスを外す</p>
+  <pre><code>this.$list.hide();</code></pre>
+  <p>エラー文を非表示にする</p>
+</div>
+<h3 id="line99">onInvalidメソッド（99行目）</h3>
+<p>【動き】inputタグからerrorクラスを付ける。該当するエラー文を表示する</p>
+<pre><code>AppView.prototype.onInvalid = function() {
+  var self = this;
+  this.$el.addClass("error");
+  this.$list.hide();
+
+  $.each(this.model.errors, function(index, val) {
+    self.$list.filter("[data-error=\"" + val + "\"]").show();
+  });
+};</code></pre>
+<div class="com">
+  <pre><code>this.$el.addClass("error");</code></pre>
+  <p>this.$elに"error"クラスを付ける</p>
+  <pre><code>this.$list.hide();</code></pre>
+  <p>エラー文を非表示にする</p>
+  <pre><code>$.each(this.model.errors, function(index, val) {
+  self.$list.filter("[data-error=\"" + val + "\"]").show();
+});</code></pre>
+  <ul>
+    <li>エラー配列が複数あるかもしれないから.eachで繰り返し処理</li>
+    <li>一致するものだけエラー文を表示</li>
+  </ul>
+</div>
+
+
+<h2>設計部分（AppModel）</h2>
+<h3 id="line1">コンストラクタ関数「AppModel」を定義（1行目）</h3>
+<pre><code>function AppModel(attrs) {
+  this.val = "";
+  this.attrs = {
+    required: attrs.required || false,
+    maxlength: attrs.maxlength || 8,
+    minlength: attrs.minlength || 4
+  };
+  this.listeners = {
+    valid: [],
+    invalid: []
+  };
+}</code></pre>
+<div class="com">
+  <pre><code>function AppModel(attrs) {}</code></pre>
+  <p>コンストラクタ関数「AppModel」を定義。<br>
+  引数（attrs）は「AppView」で作成したobjが入る。</p>
+  <pre><code>this.val = "";</code></pre>
+  <p>空のコンストラクタを用意</p>
+  <pre><code>this.attrs = {
+  required: attrs.required || false,
+  maxlength: attrs.maxlength || 8,
+  minlength: attrs.minlength || 4
+};</code></pre>
+  <p>連想配列「this.attrs」の初期値を設定。<br>
+  左の値（attrs.xxx）がなかったら右の値が設定される<br>
+  【書き方】連想配列要素名: trueの時の値（値がある場合） || falseの時の値（空の場合）</p>
+  <pre><code>this.listeners = {
+  valid: [],
+  invalid: []
+};</code></pre>
+  <p>オブザーバー機能を追加する<br>
+  オブザーバーの連想配列にvalidとinvalidの配列要素名を定義、中身は空。</p>
+</div>
+
+<h3 id="line14">setメソッド（14行目）</h3>
+<pre><code>AppModel.prototype.set = function(val) {
+  if (this.val === val) return;
+  this.val = val;
+  this.validate();
+};</code></pre>
+→setメソッドを実行している箇所を探す
+→89行目onKeyupメソッドから呼び出されている
+
+AppModel.prototype.set = function(val) { //setメソッドを宣言、引数はval
+  if (this.val === val) return; //this.valとvalが一致したらなにもしないで終了
+  this.val = val;  //this.valにvalを代入
+  this.validate(); //validateメソッド（20行目）を実行
+};
+
+<h3 id="line20">validateメソッド（20行目）</h3>
+<p>setメソッド（<a href="#line14">14行目</a>）から呼び出される</p>
+<pre><code>AppModel.prototype.validate = function() {
+  var val;
+  this.errors = [];
+
+  for (var key in this.attrs) {
+    val = this.attrs[key];
+    if (val && !this[key](val)) this.errors.push(key);
+  }
+
+  this.trigger(!this.errors.length ? "valid" : "invalid");
+};</code></pre>
+<div class="com">
+  <pre><code>this.errors = [];</code></pre>
+  <p>this.errorsの配列を用意しながらコンストラクタ関数を定義</p>
+  <pre><code>for (var key in this.attrs) {}</code></pre>
+  <p>拡張for文で変数keyに連想配列this.attrsの配列要素名を1件ずつ代入して処理する</p>
+  <pre><code>val = this.attrs[key];</code></pre>
+  <p><a href="#line1">連想配列this.attrs</a>の値がそれぞれ入る</p>
+  <pre><code>if (val && !this[key](val)) this.errors.push(key);</code></pre>
+  <ul>
+    <li>val（連想配列this.attrs）の中身があるかの確認<br>
+    　値が入っている→tureが返され処理を継続する<br>
+    　空の場合→falseが返され処理を終了する</li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  //いま処理している配列this[key](val)の値（val）を判定
+  //→not演算子（!）で判定を逆転させる
+  <pre><code>this.trigger(!this.errors.length ? "valid" : "invalid");</code></pre>
+  <ul>
+    <li>this.triggerの引数に条件演算子を使い"valid"もしくは"invalid"を渡す</li>
+    <li>this.errors配列の中身の有無で真偽を返す<br>
+    →this.errors.lengthにnot演算子がついているので値が反転する
+    <ul>
+      <li>配列の中身が空ならtrueになり引数に"valid"を返す</li>
+      <li>配列の中身が入っていたらfalseになり引数に"invalid"を返す</li>
+    </ul></li>
+  </ul>
+</div>
+<div class="ex">
+  <ul>
+    <li><strong>連想配列</strong><br>
+      要素名と値を紐づける配列。<br>
+      連想配列名：this.attrs<br>
+      連想配列要素名：required、maxlength等→配列でいう[0]<br>
+      値：中身true、8等</li>
+    <li><strong>拡張for文</strong><br>
+      配列から変数名に1件ずつ代入して処理をする。配列がなくなるまで繰り返す。<br>
+      【書き方】for(変数名 in 配列名){処理}</li>
+    <li><strong>条件演算子（三項演算子）</strong><br>
+      条件式の結果によって異なる値を返す演算子。if文の簡易版。<br>
+      【書き方】条件式 ? 真（true）の値 : 偽（false）の値</li>
+  </ul>
+</div>
+<h3>requiredメソッド（42行目）</h3>
+<pre><code>AppModel.prototype.required = function() {
+  return this.val !== "";
+};</code></pre>
+AppModel.prototype.required = function() {
+  return this.val !== ""; //this.valが空だったら
+};
+this.valは選択されたinputタグ
+!==は一致ならfalse、不一致ならtrueになる
+→inputタグの中身に何か入っていたらtrue、空だったらfalseを返す
+
+<h3>maxlengthメソッド（46行目）</h3>
+<pre><code>AppModel.prototype.maxlength = function(num) {
+  return num >= this.val.length;
+};</code></pre>
+引数num＝maxlength
+引数numがthis.valより多ければtrue、少なければfalseを返す
+→8文字以内ならtrue
+
+<h3>minlengthメソッド（50行目）</h3>
+<pre><code>AppModel.prototype.minlength = function(num) {
+  return num <= this.val.length;
+};</code></pre>
+引数num＝minlength
+引数numがthis.valより少なければtrue、多ければfalseを返す
+→4文字以上ならtrue
+
+<h3>triggerメソッド（36行目）</h3>
+<pre><code>AppModel.prototype.trigger = function(event) {
+  $.each(this.listeners[event], function() {
+    this();
+  });
+};</code></pre>
+<div class="com">
+  <pre><code>$.each(this.listeners[event], function() {
+  this();
+});</code></pre>
+  <p>this.listeners[event]が実行可能なファイルであれば実行する</p>
+</div>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>

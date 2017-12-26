@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>observer</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+<h1>コード解説（P16 chap01-03）</h1>
+<pre><code>function observer() {
+	this.listeners = {};
+}
+
+observer.prototype.on = function(event, func) {
+	if(! this.listeners[event]){
+		this.listeners[event] = [];
+	}
+	this.listeners[event].push(func);
+};
+
+observer.prototype.off = function(event, func) {
+	var ref = this.listeners[event],
+	len = ref.length;
+
+	for (var i=0; i < len; i++) {
+		var listener = ref[i];
+		if (listener === func) {
+			this.listeners.splice(i, 1);
+		}
+	}
+};
+
+observer.prototype.trigger = function(event) {
+	var ref = this.listeners[event];
+
+	for (var i=0, len=ref.length; i < len; i++) {
+		var listener = ref[i];
+		if(typeof listener === "function") listener();
+	}
+};
+
+var observer = new observer();
+var greet = function () {
+	console.log("Good morning");
+};
+observer.on("morning", greet);
+observer.trigger("morning"); // Good morning
+
+var sayEvening = function(){
+	console.log("Good evening");
+};
+observer.on("evening", sayEvening);
+observer.trigger("evening"); // Good evening
+</code></pre>
+
+<h2>コンストラクタ関数「オブザーバー」を定義</h2>
+<pre><code>function observer() {
+  this.listeners = {};
+}</code></pre>
+<p><strong>function observer(){ this.変数 = {} }</strong></p>
+<ul>
+  <li>this.変数に連想配列を用意する<br>
+      →連想配列宣言は{}<br>
+      →連想配列が作成されていたらオブザーバー</li>
+  <li>コンストラクタ関数「observer」は任意の関数名でもOK</li>
+</ul>
+<h2>メソッドを定義</h2>
+<p>observerを使うには3つのメソッド（onメソッド、offメソッド、triggerメソッド）が必要。</p>
+<h3>onメソッドの定義</h3>
+<pre><code>observer.prototype.on = function(event, func) {
+	if(! this.listeners[event]){
+		this.listeners[event] = [];
+	}
+	this.listeners[event].push(func);
+};</code></pre>
+<p><strong>【動き】this.listenersへイベント登録する（通知）</strong></p>
+<ul>
+  <li>連想配列に収納するメソッド</li>
+  <li>引数を2つ使う<br>
+  function(発見したら, 使う){ 連想配列に登録する処理 };</li>
+  <li>onメソッドの書き方は決まってる、offメソッドとセットで使う</li>
+</ul>
+<h3>offメソッドを定義</h3>
+<pre><code>observer.prototype.off = function(event, func) {
+	var ref = this.listeners[event],
+	len = ref.length;
+
+	for (var i=0; i < len; i++) {
+		var listener = ref[i];
+		if (listener === func) {
+			this.listeners.splice(i, 1);
+		}
+	}
+};</code></pre>
+<p><strong>【動き】this.listenersからイベント解除する</strong></p>
+<ul>
+  <li>引数を2つ使う<br>
+  <li>offメソッドの書き方は決まってる、onメソッドとセットで使う</li>
+</ul>
+<h3>triggerメソッドを定義</h3>
+<pre><code>observer.prototype.trigger = function(event) {
+	var ref = this.listeners[event];
+
+	for (var i=0, len=ref.length; i < len; i++) {
+		var listener = ref[i];
+		if(typeof listener === "function") listener();
+	}
+};</code></pre>
+<p><strong>【動き】this.listenersに登録しているものを実行（監視）</strong></p>
+<ul>
+  <li>triggerメソッドの引数に「event」を入れる</li>
+  <li>引数「event」の値がthis.listenersの配列に入る</li>
+</ul>
+<h2>変数を宣言する</h2>
+<h3>observerのオブジェクト変数を生成</h3>
+<pre><code>var observer = new observer();</code></pre>
+<h3>変数に無名関数を代入する</h3>
+<pre><code>var greet = function () {
+	console.log("Good morning");
+};</code></pre>
+<p>変数「greet」に無名関数を代入。</p>
+<h2>observerに実行内容を登録する</h2>
+<pre><code>observer.on("morning", greet);</code></pre>
+<p>「"morning"」を発見したら、「greet」を実行する</p>
+
+
+
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="03app.js"></script>
+  </body>
+</html>
