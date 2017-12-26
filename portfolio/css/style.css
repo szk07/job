@@ -1,17 +1,38 @@
-html::before {
-  content: "";
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html::before, html::after, body::before {
+  content: '';
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  border: 10px solid #fff;
-  z-index: 10;
+  left: 0;
+  border: solid #fff;
+  border-width: 15px 0 0;
+  z-index: -1;
+}
+
+html::after {
+  border-width: 0 0 15px;
+}
+
+body::before {
+  border-width: 0 15px 0;
 }
 
 @media (min-width: 768px) {
-  html::before {
-    border: 20px solid #fff;
+  html::before, html::after, body::before {
+    border-width: 20px 0 0;
+  }
+  html::after {
+    border-width: 0 0 20px;
+  }
+  body::before {
+    border-width: 0 20px 0;
   }
 }
 
@@ -19,6 +40,6 @@ body {
   background: #f6f6f6;
   background-image: url(../imgs/bg.png);
   margin: 0;
-  padding: 30px 50px;
+  padding: 30px;
   height: 1000px;
 }
