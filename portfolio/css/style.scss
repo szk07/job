@@ -6,6 +6,7 @@ $mediaQuery-pc: 1000px;
 
 html{
   box-sizing: border-box;
+  font-size: 62.5%;
   margin: 0;
   padding: 0;
   &::before{
@@ -43,17 +44,18 @@ body::before{
   };
 }
 body{
+  position: relative;
   background:#f6f6f6;
   background-image: url(../imgs/bg.png);
+  font-size: 1.6rem;
   margin: 15px;
-  height: 1000px;
+  height: 100%;
   @include mq-min($mediaQuery-tb){
     margin: 20px;
-  };
+  }
 }
 
-/* -------------------
-    Contents
+/* Contents
 ------------------- */
 /* Header */
 header{
@@ -64,11 +66,58 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
     width: 45%;
   }
 }
 h1{
   margin: 0;
 }
-
-/**/
+h2{
+  text-align: center;
+}
+/* Contents */
+main{
+  padding-bottom: 60px;
+  section{
+  border-top: 30px solid #fff;
+  min-height: 200px;
+  padding: 15px;
+  }
+  @include mq-min($mediaQuery-tb){
+    section{
+      padding: 30px;
+    }
+  }
+}
+form{
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  dd{
+    margin: 0;
+  }
+  input{
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    width: 100%;
+    padding: 12px;
+  }
+  @include mq-min($mediaQuery-tb){
+    width: 80%;
+    max-width: 850px;
+  }
+}
+footer{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 60px;
+  text-align: center;
+  small{
+    color: #666;
+    font-size: 1.2rem;
+  }
+}
