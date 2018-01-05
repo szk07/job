@@ -61,6 +61,7 @@ body{
 header{
   position: relative;
   width: 100%;
+  min-height: 300px;
   #head{
     position: absolute;
     top: 50%;
@@ -68,6 +69,13 @@ header{
     transform: translate(-50%, -50%);
     text-align: center;
     width: 45%;
+  }
+}
+nav{
+  ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
   }
 }
 h1{
@@ -90,23 +98,63 @@ main{
     }
   }
 }
+
+/* Form */
 form{
   display: block;
   width: 90%;
   margin: 0 auto;
-  dd{
-    margin: 0;
+  dl{
+    margin: 10px 0px;
+    dt{
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    dd{
+      margin: 0;
+    }
+    &:last-child{
+      text-align: center;
+      margin: 16px 0;
+    }
   }
   input{
     background: none;
     background-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     border: none;
     width: 100%;
     padding: 12px;
+    &:focus{
+      outline: 0;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2) inset;
+    }
+    &[type=submit]{
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: bold;
+      letter-spacing: 0.8rem;
+      text-indent: 0.8rem;
+      width: 60%;
+      min-width: 150px;
+      cursor: pointer;
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+  textarea{
+    @extend input;
+    min-height: 120px;
+    overflow: auto;
   }
   @include mq-min($mediaQuery-tb){
     width: 80%;
-    max-width: 850px;
+    max-width: 600px;
+    dl:last-child{
+      margin: 30px 0;
+    }
   }
 }
 footer{
