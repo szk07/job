@@ -57,6 +57,16 @@ body {
 
 /* Contents
 ------------------- */
+a {
+  color: #111;
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  color: #888;
+}
+
 /* Header */
 header {
   position: relative;
@@ -73,10 +83,43 @@ header #head {
   width: 45%;
 }
 
+nav {
+  margin: 20px 0;
+}
+
 nav ul {
   display: flex;
   justify-content: center;
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav a {
+  position: relative;
+  font-size: 1.4rem;
+  letter-spacing: .1rem;
+  padding: 5px 0;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  background: #bbb;
+  height: 1px;
+  width: 3rem;
+  transform: translateX(-50%);
+  transition: .3s;
+}
+
+nav a:hover::before {
+  width: 5rem;
 }
 
 h1 {
@@ -152,6 +195,7 @@ form input[type=submit], form textarea[type=submit] {
   text-indent: 0.8rem;
   width: 60%;
   min-width: 150px;
+  transition: .3s;
   cursor: pointer;
 }
 
@@ -170,7 +214,7 @@ form textarea {
     max-width: 600px;
   }
   form dl:last-child {
-    margin: 30px 0;
+    margin: 30px 0 10px;
   }
 }
 
@@ -179,7 +223,7 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  min-height: 60px;
+  min-height: 50px;
   text-align: center;
 }
 
