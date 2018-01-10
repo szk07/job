@@ -55,7 +55,7 @@ body {
   }
 }
 
-/* Contents
+/* Common
 ------------------- */
 a {
   color: #111;
@@ -67,6 +67,20 @@ a:hover {
   color: #888;
 }
 
+a.btn {
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid #111;
+  padding: 10px 20px;
+}
+
+a.btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* Contents
+------------------- */
 /* Header */
 header {
   position: relative;
@@ -132,6 +146,7 @@ h2 {
 
 /* Contents */
 main {
+  box-sizing: border-box;
   padding-bottom: 60px;
 }
 
@@ -147,47 +162,51 @@ main section {
   }
 }
 
-/* Form */
-form {
+#works .more {
+  display: block;
+  text-align: center;
+}
+
+#contact form {
   display: block;
   width: 90%;
   margin: 0 auto;
 }
 
-form dl {
+#contact form dl {
   margin: 10px 0px;
 }
 
-form dl dt {
+#contact form dl dt {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-form dl dd {
+#contact form dl dd {
   margin: 0;
 }
 
-form dl:last-child {
+#contact form dl:last-child {
   text-align: center;
   margin: 16px 0;
 }
 
-form input, form textarea {
+#contact form input, #contact form textarea {
   background: none;
   background-color: rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   border: none;
   width: 100%;
-  padding: 12px;
+  padding: 14px;
 }
 
-form input:focus, form textarea:focus {
+#contact form input:focus, #contact form textarea:focus {
   outline: 0;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2) inset;
 }
 
-form input[type=submit], form textarea[type=submit] {
-  background-color: rgba(0, 0, 0, 0.8);
+#contact form input[type=submit], #contact form textarea[type=submit] {
+  background-color: #111;
   color: #fff;
   font-size: 1.4rem;
   font-weight: bold;
@@ -199,21 +218,21 @@ form input[type=submit], form textarea[type=submit] {
   cursor: pointer;
 }
 
-form input[type=submit]:hover, form textarea[type=submit]:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+#contact form input[type=submit]:hover, #contact form textarea[type=submit]:hover {
+  background-color: rgba(17, 17, 17, 0.9);
 }
 
-form textarea {
+#contact form textarea {
   min-height: 120px;
   overflow: auto;
 }
 
 @media (min-width: 768px) {
-  form {
+  #contact form {
     width: 80%;
     max-width: 600px;
   }
-  form dl:last-child {
+  #contact form dl:last-child {
     margin: 30px 0 10px;
   }
 }
