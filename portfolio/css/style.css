@@ -71,7 +71,7 @@ a.btn {
   display: inline-block;
   box-sizing: border-box;
   border: 1px solid #111;
-  padding: 10px 20px;
+  padding: 10px 30px;
 }
 
 a.btn:hover {
@@ -223,7 +223,7 @@ main section {
 }
 
 #contact form textarea {
-  min-height: 120px;
+  min-height: 150px;
   overflow: auto;
 }
 
@@ -235,6 +235,18 @@ main section {
   #contact form dl:last-child {
     margin: 30px 0 10px;
   }
+}
+
+#contact .error {
+  color: #c7000a;
+}
+
+#contact .error input, #contact .error form textarea, #contact form .error textarea, #contact .error textarea {
+  background-color: rgba(200, 0, 10, 0.1);
+}
+
+#contact .error input:focus, #contact .error form textarea:focus, #contact form .error textarea:focus, #contact .error textarea:focus {
+  box-shadow: 0 0 6px rgba(200, 0, 10, 0.2) inset;
 }
 
 footer {
