@@ -22,15 +22,17 @@ $(function(){
   }else{
    $(this).parents('dl').removeClass('error');
   }
-  if()
-  $('#contact [name=myname]').val();
+  // submitボタン
+  var flg = true;
+  var formAry = $('input, textarea').serializeArray();
+  for(i=0; i<formAry.length; i++){
+   if(formAry[i].value === ''){
+    flg = false;
+   }
+  }
+  if(flg === true){
+   $('input.submit').removeClass('off');
+   $('input.submit').removeAttr('disabled');
+  }
  });
-
- // .each(function(){
- //  // すべてのinput・テキストエリアで空白がなかったら実行したい
- //  if($(this).val() !== ''){
- //   $('input.submit').removeClass('off');
- //   $('input.submit').removeAttr('disabled');
- //  }
- // });
 });
