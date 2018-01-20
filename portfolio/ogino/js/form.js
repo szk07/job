@@ -2,7 +2,7 @@ $(function(){
  var formArea = $('#contact input, #contact textarea');
  var formAry = formArea.serializeArray();
  var $submit = $('input.submit');
- var mailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+ var mailCheck = /^[a-zA-Z0-9]+[-\w\.]@+[a-zA-Z0-9]+[-\w\.]$/;
 
  formArea.blur(function(){
   //formArea判定
