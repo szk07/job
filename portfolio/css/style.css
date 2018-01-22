@@ -84,6 +84,12 @@ a.btn:hover {
   text-align: center;
 }
 
+.clear::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 /* Contents
 ------------------- */
 /* Header */
@@ -199,12 +205,17 @@ main section {
 }
 
 #contact form dl dt {
+  position: relative;
   font-size: 1.2rem;
   font-weight: bold;
 }
 
 #contact form dl dt span {
-  background: rgba(200, 0, 10, 0.1);
+  position: absolute;
+  right: 0;
+  background: rgba(200, 0, 10, 0.8);
+  color: #fff;
+  padding: 8px 12px;
   z-index: 1;
 }
 
