@@ -212,10 +212,11 @@ main section {
 
 #contact form dl dt span {
   position: absolute;
-  right: 0;
+  right: 12px;
+  bottom: -10px;
   background: rgba(200, 0, 10, 0.8);
   color: #fff;
-  padding: 8px 12px;
+  padding: 8px 10px 8px 14px;
   z-index: 1;
 }
 
