@@ -7,8 +7,12 @@ $(function(){
   //formArea判定
   var $val = $(this).val();
   var $dl = $(this).parents('dl');
-  if(!$val || ($(this).attr('name')=='mail' && !$val.match(mailCheck))){
-   addError($dl);
+  if(!$val){
+   var ms = '必須項目です。';
+   inputError($dl, ms);
+  }else if($(this).attr('name')=='mail' && !$val.match(mailCheck)){
+   var ms = 'アドレスの形式が正しくありません。';
+   mailError($dl, ms);
   }else{
    rmError($dl);
   }
@@ -28,10 +32,15 @@ $(function(){
  });
 
  //formArea処理
- function addError($dl){
+ function inputError($dl, ms){
   $dl.addClass('error');
   $dl.find('span').remove();
-  $dl.find('dt').append('<span>必須項目です。</span>');
+  $dl.find('dt').append('<span>'+ms+'</span>').hide().fadeIn(300);
+ }
+ function mailError($dl, ms){
+  $dl.addClass('error');
+  $dl.find('span').remove();
+  $dl.find('dt').append('<span>'+ms+'</span>').hide().fadeIn(300);
  }
  function rmError($dl){
   $dl.removeClass('error');
