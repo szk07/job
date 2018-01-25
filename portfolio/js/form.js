@@ -9,10 +9,10 @@ $(function(){
   var $dl = $(this).parents('dl');
   if(!$val){
    var ms = '必須項目です。';
-   inputError($dl, ms);
+   addError($dl, ms);
   }else if($(this).attr('name')=='mail' && !$val.match(mailCheck)){
    var ms = 'アドレスの形式が正しくありません。';
-   mailError($dl, ms);
+   addError($dl, ms);
   }else{
    rmError($dl);
   }
@@ -32,15 +32,13 @@ $(function(){
  });
 
  //formArea処理
- function inputError($dl, ms){
+ function addError($dl, ms){
   $dl.addClass('error');
   $dl.find('span').remove();
-  $dl.find('dt').append('<span>'+ms+'</span>').hide().fadeIn(300);
- }
- function mailError($dl, ms){
-  $dl.addClass('error');
-  $dl.find('span').remove();
-  $dl.find('dt').append('<span>'+ms+'</span>').hide().fadeIn(300);
+  $dl.find('dt').append('<span>'+ms+'</span>')
+  $dl.find('span')
+   .fadeIn(300)
+   .animate({bottom:'-8px'}, {duration: 500, queue: false});
  }
  function rmError($dl){
   $dl.removeClass('error');

@@ -283,9 +283,10 @@ main section {
 }
 
 #contact .error span {
+  display: none;
   position: absolute;
   right: 12px;
-  bottom: -12px;
+  bottom: 0;
   background: rgba(200, 0, 10, 0.8);
   color: #fff;
   padding: 8px 10px 8px 14px;
