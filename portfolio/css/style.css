@@ -194,6 +194,10 @@ main section {
   margin-top: 30px;
 }
 
+#works .more i {
+  padding-right: 8px;
+}
+
 #contact form {
   display: block;
   width: 90%;
